@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puzzle BI чат-бот</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+<script src="/static/vendor/plotly.min.js"></script>
+<script src="/static/dashboard.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="brand-mark">◆</div>Puzzle BI чат-бот</div>
+    <div>
+      <h4>Мои дашборды</h4>
+      <div id="saved"></div>
+    </div>
+    <div>
+      <h4>Попробуйте спросить</h4>
+      <div id="examples"></div>
+    </div>
+    <div class="status" id="status"></div>
+  </aside>
+  <main class="main">
+    <div class="feed" id="feed"></div>
+    <div class="composer">
+      <form id="form">
+        <input id="input" autocomplete="off" placeholder="Например: собери дашборд по продажам, план-факт по регионам за последний год">
+        <button>Отправить</button>
+      </form>
+    </div>
+  </main>
+</div>
+<script>
+const sid = (() => {
+  try { let s = localStorage.getItem('pbi_sid'); if (!s) { s = Math.random().toString(36).slice(2); localStorage.setItem('pbi_sid', s); } return s; }
+  catch (e) { return Math.random().toString(36).slice(2); }
+})();
+const feed = document.getElementById('feed');
+let lastTable = null;
+let liveUI = null;
+let liveDash = null;
+
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+function scroll() { feed.scrollTop = feed.scrollHeight; }
+
+function fmtCell(v, key) {
+  if (v === null || v === undefined) return '—';
+  if (typeof v === 'string') return v;
+  if (/pct|exec|share|c\d|disc_share/.test(key) && Math.abs(v) < 10000) return v.toLocaleString('ru-RU', { maximumFractionDigits: 1 });
+  return v.toLocaleString('ru-RU', { maximumFractionDigits: 0 });
+}
+
+function addUser(text) { const m = el('div', 'msg user', text); feed.appendChild(m); scroll(); }
+
+function addBot(msg) {
+  const wrap = el('div', 'msg bot');
+  if (msg.type === 'text') {
+    const b = el('div', 'bubble', msg.text);
+    if (msg.buttons) {
+      const q = el('div', 'quick');
+      msg.buttons.forEach(t => { const btn = el('button', '', t); btn.onclick = () => send(t); q.appendChild(btn); });
+      b.appendChild(q);
+    }
+    if (msg.link) {
+      const a = el('a', 'link-btn', msg.link.label);
+      a.href = msg.link.href + '?sid=' + sid;
+      b.appendChild(document.createElement('br'));
+      b.appendChild(a);
+    }
+    wrap.appendChild(b);
+  }
+  if (msg.type === 'table') {
+    wrap.classList.add('wide');
+    const box = el('div', 'tbl-wrap');
+    const cap = el('div', 'tbl-cap');
+    cap.appendChild(el('span', '', msg.caption));
+    cap.appendChild(el('small', '', `строк в разрезе ${msg.total_rows}, в единой таблице ${msg.flat_rows.toLocaleString('ru-RU')}`));
+    box.appendChild(cap);
+    const sc = el('div', 'tbl-scroll');
+    const t = el('table', 'data');
+    const tr = el('tr');
+    msg.columns.forEach((c, i) => { const th = el('th', msg.keys[i] === msg.highlight ? 'hl' : '', c); tr.appendChild(th); });
+    const thead = el('thead'); thead.appendChild(tr); t.appendChild(thead);
+    const tb = el('tbody');
+    msg.rows.forEach(r => {
+      const row = el('tr');
+      r.forEach((v, i) => row.appendChild(el('td', msg.keys[i] === msg.highlight ? 'hl' : '', fmtCell(v, msg.keys[i]))));
+      tb.appendChild(row);
+    });
+    t.appendChild(tb); sc.appendChild(t); box.appendChild(sc);
+    if (msg.sql) {
+      const d = el('details', 'sql');
+      d.appendChild(el('summary', '', 'Как получены данные: SQL только на чтение, собранный кодом по каталогу'));
+      d.appendChild(el('pre', '', msg.sql.trim()));
+      box.appendChild(d);
+    }
+    wrap.appendChild(box);
+  }
+  if (msg.type === 'dashboard') {
+    wrap.classList.add('wide');
+    const p = msg.payload;
+    if (p.table) lastTable = p.table; else p.table = lastTable;
+    if (liveDash) { liveDash.classList.add('stale'); liveDash.title = 'Предыдущая версия дашборда'; }
+    const d = el('div');
+    wrap.appendChild(d);
+    feed.appendChild(wrap);
+    renderDashboard(d, p, { onChange: ui => { liveUI = ui; } });
+    liveDash = d;
+    liveUI = null;
+    scroll();
+    return;
+  }
+  if (msg.type === 'list') {
+    wrap.classList.add('wide');
+    wrap.appendChild(el('div', 'bubble', msg.title));
+    const g = el('div', 'dlist');
+    msg.items.forEach(it => {
+      const c = el('div', 'dcard');
+      c.appendChild(el('b', '', it.name));
+      c.appendChild(el('p', '', `Создан ${it.created}, изменен ${it.updated}. Запрос: «${it.query}»`));
+      const b = el('button', '', 'Открыть'); b.onclick = () => send(`Открой «${it.name}»`);
+      c.appendChild(b); g.appendChild(c);
+    });
+    wrap.appendChild(g);
+  }
+  feed.appendChild(wrap);
+  scroll();
+}
+
+async function send(text) {
+  if (!text.trim()) return;
+  addUser(text);
+  const typing = el('div', 'msg bot typing', 'Бот думает…');
+  feed.appendChild(typing); scroll();
+  try {
+    const r = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sid, message: text, ui: liveUI }) });
+    const data = await r.json();
+    typing.remove();
+    data.messages.forEach(addBot);
+  } catch (e) {
+    typing.textContent = 'Сервер недоступен: ' + e;
+  }
+  loadSaved();
+}
+
+async function loadSaved() {
+  const box = document.getElementById('saved');
+  const items = await (await fetch('/api/dashboards')).json();
+  box.innerHTML = items.length ? '' : '<div class="status">Пока пусто. Скажите «сохрани дашборд».</div>';
+  items.slice(0, 8).forEach(it => {
+    const b = el('button', 'item', it.name);
+    b.appendChild(el('small', '', 'изменен ' + it.updated));
+    b.onclick = () => send(`Открой «${it.name}»`);
+    box.appendChild(b);
+  });
+}
+
+(async () => {
+  const info = await (await fetch('/api/info')).json();
+  const ex = document.getElementById('examples');
+  info.examples.forEach(t => { const b = el('button', 'item', t); b.onclick = () => send(t); ex.appendChild(b); });
+  document.getElementById('status').innerHTML = `<span class="dot ${info.llm ? '' : 'off'}"></span>` +
+    (info.llm ? 'LLM подключена, правила страхуют ее ответы' : 'Работают правила разбора, LLM не подключена') +
+    `<br>Данные: ${info.data_start} – ${info.data_end}, только чтение`;
+  addBot({ type: 'text', text: 'Привет! Я строю дашборды по продажам, плану и скидкам прямо в чате. Спросите на русском, например:', buttons: info.examples.slice(0, 3) });
+  loadSaved();
+})();
+
+document.getElementById('form').onsubmit = e => {
+  e.preventDefault();
+  const i = document.getElementById('input');
+  const t = i.value; i.value = '';
+  send(t);
+};
+</script>
+</body>
+</html>
