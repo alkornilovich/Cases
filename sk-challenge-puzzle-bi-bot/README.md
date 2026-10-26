@@ -84,3 +84,9 @@ static/          чат и дашборд (Plotly, без сборки фрон�
 tests/           точность и безопасность
 data/            тестовые данные кейса
 ```
+
+## Демо и хостинг
+
+Живой сайт-демо с реальными ответами бота: https://alkornilovich.github.io/Cases/
+
+Бота с чатом можно выложить в Docker (Hugging Face Spaces, Render): в папке есть Dockerfile, порт 7860.
