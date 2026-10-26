@@ -1,0 +1,45 @@
+const { chromium, devices } = require('playwright');
+const fs = require('fs');
+const path = require('path');
+const root = path.join(__dirname, '..');
+const html = '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>' + fs.readFileSync(path.join(root, 'dist/index.html'), 'utf8') + '</body></html>';
+fs.writeFileSync(path.join(root, 'dist/preview.html'), html);
+const url = 'file://' + path.join(root, 'dist/preview.html');
+(async () => {
+  const browser = await chromium.launch();
+  const errs = [];
+  const shot = async (page, name) => { await page.waitForTimeout(400); await page.screenshot({ path: path.join(root, 'screens', name + '.png'), fullPage: false }); };
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  page.on('pageerror', e => errs.push('pageerror ' + e.message));
+  page.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+  await page.goto(url);
+  await shot(page, 'd1_asis');
+  await page.click('[data-mode="tobe"]'); await shot(page, 'd2_tobe_note');
+  await page.click('[data-action="forward"]'); await shot(page, 'd3_card');
+  await page.click('.phone [data-action="approve"] >> nth=0'); await shot(page, 'd4_calc');
+  await page.click('[data-action="pause"]'); await shot(page, 'd5_j1');
+  await page.click('[data-action="toSign"]'); await shot(page, 'd6_sign');
+  await page.click('[data-action="sign"]'); await page.waitForTimeout(1600); await shot(page, 'd7_done');
+  await page.click('.bar [data-action="drawer"]'); await shot(page, 'd8_drawer');
+  await page.evaluate(() => document.querySelector('.drawer-body').scrollTop = 900); await shot(page, 'd8b_drawer');
+  await page.click('.drawer-head [data-action="drawer"]');
+  await page.click('[data-action="whatif"]'); await page.selectOption('#wiSeason', 'agro'); await shot(page, 'd9_whatif_agro');
+  await page.click('[data-key="fdBoss"]'); await page.click('[data-viewer="manager"]'); await shot(page, 'd10_manager');
+  await ctx.close();
+  for (const dev of ['iPhone 13', 'Pixel 7']) {
+    const c = await browser.newContext({ ...devices[dev] });
+    const pg = await c.newPage();
+    pg.on('pageerror', e => errs.push(dev + ' ' + e.message));
+    await pg.goto(url + '#boss');
+    await shot(pg, 'm_' + dev.replace(' ', '') + '_boss');
+    await pg.goto(url); await pg.reload();
+    await pg.click('[data-mode="tobe"]');
+    await shot(pg, 'm_' + dev.replace(' ', '') + '_acc');
+    const w = await pg.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    console.log(dev, 'horizontal overflow px:', w);
+    await c.close();
+  }
+  await browser.close();
+  console.log('errors:', errs.length ? errs : 'нет');
+})();

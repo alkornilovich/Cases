@@ -1,0 +1,2586 @@
+{
+ "params": {
+  "window_weeks": [
+   2,
+   6
+  ],
+  "window_multiplier": 1.6,
+  "industry_multiplier": 1.4,
+  "forecast_confidence_min": 0.7,
+  "do_nothing_threshold": 0.2,
+  "role_model_confidence_min": 0.6,
+  "not_now_pause_days": 30,
+  "note_forward_timeout_days": 5,
+  "lpr_card_min_interval_days": 14,
+  "off_window_max_per_month": 1,
+  "digital_type": {
+   "Цифровой": "ИБ и push, до 2 предложений в неделю",
+   "Смешанный": "ИБ и email раз в неделю, затем менеджер",
+   "Через менеджера": "один бриф менеджеру на цикл потребности"
+  },
+  "holding": "от 5 юрлиц или выручка группы от 10 млрд ₽: менеджер + «Альфа-Босс», карточка раз в 2 недели"
+ },
+ "profiles": [
+  {
+   "profile_id": "P1",
+   "label": "Агропоставщик в группе, разрыв в окне, финдиректор в «Альфа-Боссе» — Г1, записка через бухгалтера",
+   "source_company_id": "U_3880",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_3880",
+    "industry": "Оптовая торговля",
+    "okved": "46.21",
+    "season_type": "agro_trade",
+    "size_segment": "Средний",
+    "revenue_company_mln": 536.4,
+    "region": "Волгоградская область",
+    "ved_allowed": 1,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.787,
+    "products": [],
+    "history_months": 18
+   },
+   "structure": {
+    "group_id": "group_103687_sb",
+    "group_size": 3,
+    "is_head_company": 1,
+    "holding_flag": 0,
+    "group_main_industry": "Оптовая торговля",
+    "group_n_industries": 2,
+    "revenue_group_mln": 537.7,
+    "group_free_cash_mln": 1.7
+   },
+   "forecast": {
+    "gap_date": "2026-12-04",
+    "weeks_to_gap": 5.6,
+    "gap_amount_mln": 48.2,
+    "confidence": 0.81,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "F_22262",
+     "role_crm": null,
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.89,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 1,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_1183",
+     "role_crm": "Финансовый директор",
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.83,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 0,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 1,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_1184",
+     "role_crm": "Главный бухгалтер",
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.91,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 14,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 0,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_1185",
+     "role_crm": null,
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.57,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 17,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_1186",
+     "role_crm": "Руководитель закупок",
+     "role_model_pred": "Руководитель закупок",
+     "role_model_confidence": 0.8,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Только просмотр",
+     "has_alfa_business": 0,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.287,
+    "Факторинг": 0.204,
+    "Депозит": 0.313,
+    "ВЭД": 0.482,
+    "Лизинг": 0.276,
+    "Кэш-пулинг": 0.055
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 64.9,
+     "rate_from": 20.4
+    },
+    "Факторинг": {
+     "limit_mln": 28.6,
+     "rate_from": 21.8
+    },
+    "Лизинг": {
+     "limit_mln": 77.7,
+     "rate_from": 20.2
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_4172",
+    "user_id": "FS_1184",
+    "app": "Интернет-банк (веб)",
+    "product": "Факторинг",
+    "started_at": "2026-08-11 08:54:41",
+    "duration_sec": 72,
+    "n_back": 0,
+    "max_pause_sec": 0,
+    "n_calc_changes": 1,
+    "n_product_sections": 0,
+    "n_field_errors": 0,
+    "draft_saved": 0,
+    "submitted": 1,
+    "n_steps": 6
+   },
+   "comm_last_30d": 1,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Оборотный кредит",
+    "path": "Г1, группа C: записка через бухгалтера",
+    "addressee_lpr": "FS_1183",
+    "addressee_lpr_role": "Финансовый директор",
+    "note_to": "FS_1185",
+    "channels": [
+     "Записка бухгалтеру в «Альфа-Бизнесе» (FS_1185)",
+     "Карточка ЛПР в «Альфа-Боссе» (FS_1183)"
+    ],
+    "frequency": "Одна записка на цикл потребности; карточка ЛПР не чаще раза в 2 недели и повторно только после ответа",
+    "texts": {
+     "Бухгалтеру": "4 декабря у компании может не хватить 48,2 млн ₽ на платежи поставщикам. Заявка на кредитную линию заполнена — нужна подпись руководителя.",
+     "ЛПР": "Предварительное предложение: кредитная линия 48,2 млн ₽ до 4 декабря — перед пиком отгрузок аграриям, поручительство группы. Решение банк примет после заявки.",
+     "Почему вы это видите": "Прогноз по оборотам на ваших счетах в Альфа-Банке"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.287,
+     "Факторинг": 0.204,
+     "Депозит": 0.313,
+     "ВЭД": 0.482,
+     "Лизинг": 0.276,
+     "Кэш-пулинг": 0.055
+    },
+    "ranking_after": {
+     "Оборотный кредит": 0.643,
+     "ВЭД": 0.482,
+     "Депозит": 0.313,
+     "Факторинг": 0.286,
+     "Лизинг": 0.276,
+     "Кэш-пулинг": 0.055
+    },
+    "rule_trace": [
+     "2 Окно: разрыв через 5.6 нед. — оборотный ×1,6",
+     "3 Отрасль: сезонность «agro_trade» — оборотный и факторинг ×1,4",
+     "5 Структура: свободных денег группы 1.7 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Финансовый директор (CRM)",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — да, push — нет согласия, звонок — да",
+     "6 Частота: Одна записка на цикл потребности; карточка ЛПР не чаще раза в 2 недели и повторно только после ответа"
+    ],
+    "manager_contact": null,
+    "journey_adaptation": {
+     "rule_id": "J7",
+     "signal": "Нет сложностей",
+     "adaptation": "Кнопка «Подать заявку» прямо на карточке"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P2",
+   "label": "Тот же тип, но ЛПР не пользуется «Альфа-Боссом» — бриф менеджеру",
+   "source_company_id": "U_62951",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_62951",
+    "industry": "Оптовая торговля",
+    "okved": "46.75.1",
+    "season_type": "agro_trade",
+    "size_segment": "Средний",
+    "revenue_company_mln": 2184.8,
+    "region": "Приморский край",
+    "ved_allowed": 1,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.537,
+    "products": [],
+    "history_months": 24
+   },
+   "structure": {
+    "group_id": "group_112465_sb",
+    "group_size": 5,
+    "is_head_company": 1,
+    "holding_flag": 1,
+    "group_main_industry": "Оптовая торговля",
+    "group_n_industries": 3,
+    "revenue_group_mln": 2373.7,
+    "group_free_cash_mln": 18.2
+   },
+   "forecast": {
+    "gap_date": "2026-11-19",
+    "weeks_to_gap": 3.4,
+    "gap_amount_mln": 427.6,
+    "confidence": 0.86,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "F_63408",
+     "role_crm": "Руководитель закупок",
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.85,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 8,
+     "digital_type": "Смешанный",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_3511",
+     "role_crm": null,
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.87,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 3,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_3512",
+     "role_crm": "Главный бухгалтер",
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.88,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 21,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_3513",
+     "role_crm": "Бухгалтер",
+     "role_model_pred": "Руководитель закупок",
+     "role_model_confidence": 0.73,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 16,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.248,
+    "Факторинг": 0.119,
+    "Депозит": 0.26,
+    "ВЭД": 0.447,
+    "Лизинг": 0.11,
+    "Кэш-пулинг": 0.274
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 262.6,
+     "rate_from": 22.2
+    },
+    "Факторинг": {
+     "limit_mln": 286.4,
+     "rate_from": 19.0
+    },
+    "Лизинг": {
+     "limit_mln": 322.0,
+     "rate_from": 21.7
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_4947",
+    "user_id": "F_63408",
+    "app": "Альфа-Босс",
+    "product": "Оборотный кредит",
+    "started_at": "2026-10-08 05:44:33",
+    "duration_sec": 329,
+    "n_back": 2,
+    "max_pause_sec": 123,
+    "n_calc_changes": 3,
+    "n_product_sections": 0,
+    "n_field_errors": 0,
+    "draft_saved": 0,
+    "submitted": 0,
+    "n_steps": 11
+   },
+   "comm_last_30d": 0,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Оборотный кредит",
+    "path": "Тип активности ЛПР: Через менеджера",
+    "addressee_lpr": "FS_3511",
+    "addressee_lpr_role": "Финансовый директор",
+    "note_to": "FS_3512",
+    "channels": [
+     "Бриф менеджеру с готовым расчётом"
+    ],
+    "frequency": "один бриф менеджеру на цикл потребности",
+    "texts": {
+     "ЛПР": "Предварительное предложение: кредитная линия 427,6 млн ₽ до 19 ноября — перед пиком отгрузок аграриям, поручительство группы. Решение банк примет после заявки.",
+     "Почему вы это видите": "Прогноз по оборотам на ваших счетах в Альфа-Банке",
+     "Бриф менеджеру": "Оборотный кредит: разрыв 427,6 млн ₽ к 19 ноября, уверенность 0.86. ЛПР — Финансовый директор; аргумент: сумма, срок и разрыв. Повод для звонка: «Предварительное предложение: кредитная линия 427,6 млн ₽ до 19 ноября — перед пиком отгрузок аграриям, поручительство группы. Решение банк примет после заявки.»"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.248,
+     "Факторинг": 0.119,
+     "Депозит": 0.26,
+     "ВЭД": 0.447,
+     "Лизинг": 0.11,
+     "Кэш-пулинг": 0.274
+    },
+    "ranking_after": {
+     "Оборотный кредит": 0.556,
+     "ВЭД": 0.447,
+     "Кэш-пулинг": 0.274,
+     "Депозит": 0.26,
+     "Факторинг": 0.167,
+     "Лизинг": 0.11
+    },
+    "rule_trace": [
+     "2 Окно: разрыв через 3.4 нед. — оборотный ×1,6",
+     "3 Отрасль: сезонность «agro_trade» — оборотный и факторинг ×1,4",
+     "5 Структура: свободных денег группы 18.2 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Финансовый директор (модель ЛПР (CRM пуста))",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — да, push — да, звонок — да",
+     "6 Частота: один бриф менеджеру на цикл потребности"
+    ],
+    "manager_contact": "Звонок с предложением",
+    "journey_adaptation": {
+     "rule_id": "J1",
+     "signal": "Сомнение",
+     "adaptation": "Подсказка «сумма посчитана по вашим оборотам», предзаполнить калькулятор, кнопка «обсудить с менеджером»"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P3",
+   "label": "Стройка, разрыв через несколько месяцев — вне окна, кредит не чаще раза в месяц",
+   "source_company_id": "U_828",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_828",
+    "industry": "Строительство",
+    "okved": "42.11",
+    "season_type": "construction",
+    "size_segment": "Средний",
+    "revenue_company_mln": 4525.9,
+    "region": "Приморский край",
+    "ved_allowed": 0,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.0,
+    "products": [],
+    "history_months": 24
+   },
+   "structure": {
+    "group_id": "group_108432_sb",
+    "group_size": 3,
+    "is_head_company": 1,
+    "holding_flag": 0,
+    "group_main_industry": "Строительство",
+    "group_n_industries": 1,
+    "revenue_group_mln": 6235.8,
+    "group_free_cash_mln": 138.5
+   },
+   "forecast": {
+    "gap_date": "2027-03-06",
+    "weeks_to_gap": 18.7,
+    "gap_amount_mln": 178.0,
+    "confidence": 0.94,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "F_25369",
+     "role_crm": null,
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.96,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 2,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_2471",
+     "role_crm": null,
+     "role_model_pred": "Операционист",
+     "role_model_confidence": 0.53,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 0,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_2472",
+     "role_crm": "Главный бухгалтер",
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.55,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 11,
+     "boss_active_days_30d": 0,
+     "digital_type": "Смешанный",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_2475",
+     "role_crm": null,
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.63,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 19,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.409,
+    "Факторинг": 0.217,
+    "Депозит": 0.245,
+    "ВЭД": 0.15,
+    "Лизинг": 0.22,
+    "Кэш-пулинг": 0.101
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 572.2,
+     "rate_from": 22.4
+    },
+    "Факторинг": {
+     "limit_mln": 268.3,
+     "rate_from": 20.7
+    },
+    "Лизинг": {
+     "limit_mln": 372.8,
+     "rate_from": 21.9
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_5503",
+    "user_id": "F_25369",
+    "app": "Альфа-Босс",
+    "product": "Оборотный кредит",
+    "started_at": "2026-09-18 12:46:55",
+    "duration_sec": 197,
+    "n_back": 0,
+    "max_pause_sec": 0,
+    "n_calc_changes": 0,
+    "n_product_sections": 3,
+    "n_field_errors": 0,
+    "draft_saved": 1,
+    "submitted": 0,
+    "n_steps": 12
+   },
+   "comm_last_30d": 3,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Оборотный кредит",
+    "path": "Напрямую ЛПР",
+    "addressee_lpr": "F_25369",
+    "addressee_lpr_role": "Собственник",
+    "note_to": "FS_2475",
+    "channels": [
+     "Карточка ЛПР в «Альфа-Боссе» (F_25369)"
+    ],
+    "frequency": "Вне окна — не чаще раза в месяц",
+    "texts": {
+     "ЛПР": "По оборотам прошлого года к 6 марта компании понадобится около 178 млн ₽ — до старта строительного сезона. Линию можно открыть заранее и не платить, пока не используете.",
+     "Почему вы это видите": "Прогноз по оборотам на ваших счетах в Альфа-Банке"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.409,
+     "Факторинг": 0.217,
+     "Депозит": 0.245,
+     "ВЭД": 0.15,
+     "Лизинг": 0.22,
+     "Кэш-пулинг": 0.101
+    },
+    "ranking_after": {
+     "Оборотный кредит": 0.573,
+     "Лизинг": 0.308,
+     "Депозит": 0.245,
+     "Факторинг": 0.217,
+     "Кэш-пулинг": 0.101
+    },
+    "rule_trace": [
+     "1 Допуск: нет ВЭД-признаков (ФТС) — ВЭД отсеян",
+     "2 Окно: разрыв через 18.7 нед., вне окна — кредит не чаще раза в месяц",
+     "3 Отрасль: сезонность «construction» — оборотный и лизинг ×1,4",
+     "5 Структура: свободных денег группы 138.5 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Собственник (модель ЛПР (CRM пуста))",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — нет согласия, push — нет согласия, звонок — да",
+     "6 Частота: Вне окна — не чаще раза в месяц"
+    ],
+    "manager_contact": null,
+    "journey_adaptation": {
+     "rule_id": "J3",
+     "signal": "Сравнение",
+     "adaptation": "Блок сравнения продуктов под задачу (разрыв)"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P4",
+   "label": "Холдинг: свободные деньги группы покрывают разрыв — кэш-пулинг",
+   "source_company_id": "U_38066",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_38066",
+    "industry": "Строительство",
+    "okved": "41.20.9",
+    "season_type": "construction",
+    "size_segment": "Средний",
+    "revenue_company_mln": 120.0,
+    "region": "Краснодарский край",
+    "ved_allowed": 0,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.056,
+    "products": [],
+    "history_months": 24
+   },
+   "structure": {
+    "group_id": "group_85893_sb",
+    "group_size": 6,
+    "is_head_company": 0,
+    "holding_flag": 1,
+    "group_main_industry": "Строительство",
+    "group_n_industries": 3,
+    "revenue_group_mln": 567.8,
+    "group_free_cash_mln": 21.9
+   },
+   "forecast": {
+    "gap_date": "2026-11-09",
+    "weeks_to_gap": 2.0,
+    "gap_amount_mln": 13.5,
+    "confidence": 0.95,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "F_20367",
+     "role_crm": "Собственник",
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.39,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_9030",
+     "role_crm": "Финансовый директор",
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.75,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 3,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_9031",
+     "role_crm": null,
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.86,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 17,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_9032",
+     "role_crm": "Бухгалтер",
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.75,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 15,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.247,
+    "Факторинг": 0.136,
+    "Депозит": 0.29,
+    "ВЭД": 0.208,
+    "Лизинг": 0.134,
+    "Кэш-пулинг": 0.01
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 12.5,
+     "rate_from": 19.4
+    },
+    "Факторинг": {
+     "limit_mln": 7.2,
+     "rate_from": 20.2
+    },
+    "Лизинг": {
+     "limit_mln": 12.3,
+     "rate_from": 22.1
+    }
+   },
+   "journey_last_session": null,
+   "comm_last_30d": 3,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Кэш-пулинг",
+    "path": "Тип активности ЛПР: Через менеджера",
+    "addressee_lpr": "FS_9030",
+    "addressee_lpr_role": "Финансовый директор",
+    "note_to": "FS_9031",
+    "channels": [
+     "Бриф менеджеру с готовым расчётом"
+    ],
+    "frequency": "один бриф менеджеру на цикл потребности",
+    "texts": {
+     "ЛПР": "В группе свободно 21,9 млн ₽, а этой компании к 9 ноября не хватит 13,5 млн ₽. Кэш-пулинг закроет разрыв деньгами группы — без кредита и процентов.",
+     "Почему вы это видите": "Прогноз по оборотам на ваших счетах в Альфа-Банке",
+     "Бриф менеджеру": "Кэш-пулинг: разрыв 13,5 млн ₽ к 9 ноября, уверенность 0.95. ЛПР — Финансовый директор; аргумент: сумма, срок и разрыв. Повод для звонка: «В группе свободно 21,9 млн ₽, а этой компании к 9 ноября не хватит 13,5 млн ₽. Кэш-пулинг закроет разрыв деньгами группы — без кредита и процентов.»"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.247,
+     "Факторинг": 0.136,
+     "Депозит": 0.29,
+     "ВЭД": 0.208,
+     "Лизинг": 0.134,
+     "Кэш-пулинг": 0.01
+    },
+    "ranking_after": {
+     "Кэш-пулинг": 0.581,
+     "Оборотный кредит": 0.553,
+     "Депозит": 0.29,
+     "Лизинг": 0.188,
+     "Факторинг": 0.136
+    },
+    "rule_trace": [
+     "1 Допуск: нет ВЭД-признаков (ФТС) — ВЭД отсеян",
+     "2 Окно: разрыв через 2.0 нед. — оборотный ×1,6",
+     "3 Отрасль: сезонность «construction» — оборотный и лизинг ×1,4",
+     "5 Структура: свободных денег группы 21.9 млн ≥ разрыва 13.5 млн — кэш-пулинг выше кредита",
+     "4 Роль: ЛПР — Финансовый директор (CRM)",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — нет согласия, push — да, звонок — да",
+     "6 Частота: один бриф менеджеру на цикл потребности"
+    ],
+    "manager_contact": "Звонок с предложением",
+    "journey_adaptation": {
+     "rule_id": null,
+     "signal": "Нет данных о сессиях",
+     "adaptation": "Стандартный путь"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P5",
+   "label": "Роли в CRM нет — адресата выбирает модель ЛПР",
+   "source_company_id": "U_45987",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_45987",
+    "industry": "Строительство",
+    "okved": "43.29",
+    "season_type": "construction",
+    "size_segment": "Средний",
+    "revenue_company_mln": 508.1,
+    "region": "Тюменская область",
+    "ved_allowed": 0,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.893,
+    "products": [
+     "ДЕПОЗИТ",
+     "ЭКВАЙРИНГ"
+    ],
+    "history_months": 24
+   },
+   "structure": {
+    "group_id": "group_94810_sb",
+    "group_size": 2,
+    "is_head_company": 1,
+    "holding_flag": 0,
+    "group_main_industry": "Строительство",
+    "group_n_industries": 2,
+    "revenue_group_mln": 508.7,
+    "group_free_cash_mln": 0.3
+   },
+   "forecast": {
+    "gap_date": "2026-11-13",
+    "weeks_to_gap": 2.6,
+    "gap_amount_mln": 53.0,
+    "confidence": 0.82,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "FS_13363",
+     "role_crm": null,
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.87,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 4,
+     "digital_type": "Смешанный",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_13364",
+     "role_crm": null,
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.72,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 0,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 3,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_13365",
+     "role_crm": null,
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.54,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 16,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_13366",
+     "role_crm": null,
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.82,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 18,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_13367",
+     "role_crm": "Операционист",
+     "role_model_pred": "Операционист",
+     "role_model_confidence": 0.89,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 15,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 1,
+     "inapp_offers_hidden": 1,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 0,
+     "push_enabled": 0
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.536,
+    "Факторинг": 0.225,
+    "Депозит": 0.225,
+    "ВЭД": 0.106,
+    "Лизинг": 0.061,
+    "Кэш-пулинг": 0.119
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 73.0,
+     "rate_from": 17.9
+    },
+    "Факторинг": {
+     "limit_mln": 63.9,
+     "rate_from": 20.5
+    },
+    "Лизинг": {
+     "limit_mln": 72.5,
+     "rate_from": 18.3
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_4410",
+    "user_id": "FS_13364",
+    "app": "Альфа-Босс",
+    "product": "Оборотный кредит",
+    "started_at": "2026-10-12 07:58:13",
+    "duration_sec": 94,
+    "n_back": 0,
+    "max_pause_sec": 0,
+    "n_calc_changes": 0,
+    "n_product_sections": 0,
+    "n_field_errors": 2,
+    "draft_saved": 0,
+    "submitted": 0,
+    "n_steps": 7
+   },
+   "comm_last_30d": 5,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Оборотный кредит",
+    "path": "Г1, группа C: записка через бухгалтера",
+    "addressee_lpr": "FS_13364",
+    "addressee_lpr_role": "Финансовый директор",
+    "note_to": "FS_13366",
+    "channels": [
+     "Записка бухгалтеру в «Альфа-Бизнесе» (FS_13366)",
+     "Карточка ЛПР в «Альфа-Боссе» (FS_13364)"
+    ],
+    "frequency": "Одна записка на цикл потребности; карточка ЛПР не чаще раза в 2 недели и повторно только после ответа",
+    "texts": {
+     "Бухгалтеру": "13 ноября у компании может не хватить 53 млн ₽ на платежи поставщикам. Заявка на кредитную линию заполнена — нужна подпись руководителя.",
+     "ЛПР": "Предварительное предложение: кредитная линия 53 млн ₽ до 13 ноября — до старта строительного сезона, поручительство группы. Решение банк примет после заявки.",
+     "Почему вы это видите": "Прогноз по оборотам на ваших счетах в Альфа-Банке"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.536,
+     "Факторинг": 0.225,
+     "Депозит": 0.225,
+     "ВЭД": 0.106,
+     "Лизинг": 0.061,
+     "Кэш-пулинг": 0.119
+    },
+    "ranking_after": {
+     "Оборотный кредит": 1.201,
+     "Факторинг": 0.225,
+     "Депозит": 0.225,
+     "Кэш-пулинг": 0.119,
+     "Лизинг": 0.085
+    },
+    "rule_trace": [
+     "1 Допуск: нет ВЭД-признаков (ФТС) — ВЭД отсеян",
+     "2 Окно: разрыв через 2.6 нед. — оборотный ×1,6",
+     "3 Отрасль: сезонность «construction» — оборотный и лизинг ×1,4",
+     "5 Структура: свободных денег группы 0.3 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Финансовый директор (модель ЛПР (CRM пуста))",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — да, push — нет согласия, звонок — да",
+     "6 Частота: Одна записка на цикл потребности; карточка ЛПР не чаще раза в 2 недели и повторно только после ответа"
+    ],
+    "manager_contact": null,
+    "journey_adaptation": {
+     "rule_id": "J4",
+     "signal": "Сложная форма",
+     "adaptation": "«Заполнит менеджер», сохранить черновик, подсказки к полям"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P6",
+   "label": "Клиент отказался от рекламы — только сервисное уведомление",
+   "source_company_id": "U_366",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_366",
+    "industry": "Прочие услуги",
+    "okved": "81.22",
+    "season_type": "construction_trade",
+    "size_segment": "Средний",
+    "revenue_company_mln": 340.7,
+    "region": "Москва",
+    "ved_allowed": 0,
+    "supplier_of_seasonal": 1,
+    "seasonal_payer_share": 0.442,
+    "products": [
+     "ДЕПОЗИТ",
+     "ЭКВАЙРИНГ"
+    ],
+    "history_months": 6
+   },
+   "structure": {
+    "group_id": "group_111280_sb",
+    "group_size": 3,
+    "is_head_company": 0,
+    "holding_flag": 0,
+    "group_main_industry": "Оптовая торговля",
+    "group_n_industries": 2,
+    "revenue_group_mln": 1154.9,
+    "group_free_cash_mln": 57.8
+   },
+   "forecast": {
+    "gap_date": "2026-11-12",
+    "weeks_to_gap": 2.4,
+    "gap_amount_mln": 42.4,
+    "confidence": 0.75,
+    "method": "кривая отрасли"
+   },
+   "users": [
+    {
+     "user_id": "F_75627",
+     "role_crm": "Финансовый директор",
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.67,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 1,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 1,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_3145",
+     "role_crm": "Финансовый директор",
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.87,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 2,
+     "boss_active_days_30d": 10,
+     "digital_type": "Цифровой",
+     "optout_all": 1,
+     "inapp_offers_hidden": 1,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_3146",
+     "role_crm": "Руководитель закупок",
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.68,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 11,
+     "boss_active_days_30d": 0,
+     "digital_type": "Смешанный",
+     "optout_all": 1,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_3147",
+     "role_crm": null,
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.78,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 20,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 1,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.343,
+    "Факторинг": 0.102,
+    "Депозит": 0.345,
+    "ВЭД": 0.182,
+    "Лизинг": 0.01,
+    "Кэш-пулинг": 0.038
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 46.7,
+     "rate_from": 20.0
+    },
+    "Факторинг": {
+     "limit_mln": 15.6,
+     "rate_from": 20.6
+    },
+    "Лизинг": {
+     "limit_mln": 49.3,
+     "rate_from": 22.0
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_4104",
+    "user_id": "F_75627",
+    "app": "Альфа-Бизнес (приложение)",
+    "product": "Оборотный кредит",
+    "started_at": "2026-10-18 14:01:22",
+    "duration_sec": 158,
+    "n_back": 0,
+    "max_pause_sec": 0,
+    "n_calc_changes": 0,
+    "n_product_sections": 3,
+    "n_field_errors": 0,
+    "draft_saved": 1,
+    "submitted": 0,
+    "n_steps": 12
+   },
+   "comm_last_30d": 1,
+   "expected_output": {
+    "action": "Только сервисное уведомление о прогнозе",
+    "offer": null,
+    "rule_trace": [
+     "1 Допуск: нет ВЭД-признаков (ФТС) — ВЭД отсеян",
+     "1 Допуск: отказ от рекламы — маркетинг не показываем"
+    ],
+    "ranking_before": {
+     "Оборотный кредит": 0.343,
+     "Факторинг": 0.102,
+     "Депозит": 0.345,
+     "ВЭД": 0.182,
+     "Лизинг": 0.01,
+     "Кэш-пулинг": 0.038
+    },
+    "ranking_after": {}
+   }
+  },
+  {
+   "profile_id": "P7",
+   "label": "Несезонный импортёр без разрыва — ВЭД разрешён",
+   "source_company_id": "U_211",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_211",
+    "industry": "Прочие услуги",
+    "okved": "86.21",
+    "season_type": "flat",
+    "size_segment": "Средний",
+    "revenue_company_mln": 8104.3,
+    "region": "Москва",
+    "ved_allowed": 1,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.133,
+    "products": [],
+    "history_months": 18
+   },
+   "structure": {
+    "group_id": "group_108178_sb",
+    "group_size": 2,
+    "is_head_company": 1,
+    "holding_flag": 0,
+    "group_main_industry": "Прочие услуги",
+    "group_n_industries": 2,
+    "revenue_group_mln": 8105.2,
+    "group_free_cash_mln": 0.0
+   },
+   "forecast": {
+    "gap_date": null,
+    "weeks_to_gap": null,
+    "gap_amount_mln": 0.0,
+    "confidence": 0.45,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "F_17882",
+     "role_crm": "Собственник",
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.9,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 3,
+     "boss_active_days_30d": 8,
+     "digital_type": "Смешанный",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_2386",
+     "role_crm": null,
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.87,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 2,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 0,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_2387",
+     "role_crm": "Главный бухгалтер",
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.81,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 20,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_2388",
+     "role_crm": null,
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.81,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 18,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 0,
+     "push_enabled": 1
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.213,
+    "Факторинг": 0.01,
+    "Депозит": 0.24,
+    "ВЭД": 0.334,
+    "Лизинг": 0.101,
+    "Кэш-пулинг": 0.01
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 628.7,
+     "rate_from": 22.2
+    },
+    "Факторинг": {
+     "limit_mln": 514.2,
+     "rate_from": 18.8
+    },
+    "Лизинг": {
+     "limit_mln": 394.3,
+     "rate_from": 17.8
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_2816",
+    "user_id": "F_17882",
+    "app": "Альфа-Бизнес (приложение)",
+    "product": "Факторинг",
+    "started_at": "2026-09-11 15:29:23",
+    "duration_sec": 257,
+    "n_back": 2,
+    "max_pause_sec": 108,
+    "n_calc_changes": 3,
+    "n_product_sections": 0,
+    "n_field_errors": 0,
+    "draft_saved": 0,
+    "submitted": 0,
+    "n_steps": 11
+   },
+   "comm_last_30d": 0,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "ВЭД",
+    "path": "Тип активности ЛПР: Через менеджера",
+    "addressee_lpr": "FS_2386",
+    "addressee_lpr_role": "Финансовый директор",
+    "note_to": "FS_2387",
+    "channels": [
+     "Бриф менеджеру с готовым расчётом"
+    ],
+    "frequency": "один бриф менеджеру на цикл потребности",
+    "texts": {
+     "ЛПР": "Валютные платежи и валютный контроль в одном окне.",
+     "Почему вы это видите": "Подобрано по профилю компании",
+     "Бриф менеджеру": "ВЭД. ЛПР — Финансовый директор; аргумент: сумма, срок и разрыв. Повод для звонка: «Валютные платежи и валютный контроль в одном окне.»"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.213,
+     "Факторинг": 0.01,
+     "Депозит": 0.24,
+     "ВЭД": 0.334,
+     "Лизинг": 0.101,
+     "Кэш-пулинг": 0.01
+    },
+    "ranking_after": {
+     "ВЭД": 0.334,
+     "Депозит": 0.24,
+     "Оборотный кредит": 0.213,
+     "Лизинг": 0.101,
+     "Факторинг": 0.01,
+     "Кэш-пулинг": 0.01
+    },
+    "rule_trace": [
+     "5 Структура: свободных денег группы 0.0 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Финансовый директор (модель ЛПР (CRM пуста))",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — нет согласия, push — нет согласия, звонок — да",
+     "6 Частота: один бриф менеджеру на цикл потребности"
+    ],
+    "manager_contact": "Звонок с предложением",
+    "journey_adaptation": {
+     "rule_id": "J1",
+     "signal": "Сомнение",
+     "adaptation": "Подсказка «сумма посчитана по вашим оборотам», предзаполнить калькулятор, кнопка «обсудить с менеджером»"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P8",
+   "label": "Прогноз неуверенный (< 0,7) — текущий процесс",
+   "source_company_id": "U_469",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_469",
+    "industry": "Энергетика и ЖКХ",
+    "okved": "35.14",
+    "season_type": "flat",
+    "size_segment": "Крупный",
+    "revenue_company_mln": 13768.7,
+    "region": "Самарская область",
+    "ved_allowed": 0,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.112,
+    "products": [],
+    "history_months": 24
+   },
+   "structure": {
+    "group_id": "group_133523_sb",
+    "group_size": 5,
+    "is_head_company": 1,
+    "holding_flag": 1,
+    "group_main_industry": "Энергетика и ЖКХ",
+    "group_n_industries": 5,
+    "revenue_group_mln": 13924.5,
+    "group_free_cash_mln": 0.0
+   },
+   "forecast": {
+    "gap_date": "2026-11-12",
+    "weeks_to_gap": 2.4,
+    "gap_amount_mln": 232.6,
+    "confidence": 0.54,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "F_38163",
+     "role_crm": null,
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.9,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_6970",
+     "role_crm": "Финансовый директор",
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.94,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_6971",
+     "role_crm": null,
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.92,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 16,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_6972",
+     "role_crm": null,
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.69,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 17,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.503,
+    "Факторинг": 0.15,
+    "Депозит": 0.304,
+    "ВЭД": 0.239,
+    "Лизинг": 0.054,
+    "Кэш-пулинг": 0.244
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 1719.5,
+     "rate_from": 21.5
+    },
+    "Факторинг": {
+     "limit_mln": 1664.4,
+     "rate_from": 22.7
+    },
+    "Лизинг": {
+     "limit_mln": 1686.2,
+     "rate_from": 18.2
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_4448",
+    "user_id": "F_38163",
+    "app": "Альфа-Бизнес (приложение)",
+    "product": "Депозит",
+    "started_at": "2026-10-22 14:11:56",
+    "duration_sec": 112,
+    "n_back": 0,
+    "max_pause_sec": 0,
+    "n_calc_changes": 0,
+    "n_product_sections": 0,
+    "n_field_errors": 3,
+    "draft_saved": 0,
+    "submitted": 0,
+    "n_steps": 8
+   },
+   "comm_last_30d": 6,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Оборотный кредит",
+    "path": "Тип активности ЛПР: Через менеджера",
+    "addressee_lpr": "F_38163",
+    "addressee_lpr_role": "Собственник",
+    "note_to": "FS_6972",
+    "channels": [
+     "Бриф менеджеру с готовым расчётом"
+    ],
+    "frequency": "один бриф менеджеру на цикл потребности",
+    "texts": {
+     "ЛПР": "Оборотный кредит для бизнеса: лимит под обороты компании, решение онлайн.",
+     "Почему вы это видите": "Подобрано по профилю компании",
+     "Бриф менеджеру": "Оборотный кредит. ЛПР — Собственник; аргумент: рост без изъятия денег из оборота. Повод для звонка: «Оборотный кредит для бизнеса: лимит под обороты компании, решение онлайн.»"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.503,
+     "Факторинг": 0.15,
+     "Депозит": 0.304,
+     "ВЭД": 0.239,
+     "Лизинг": 0.054,
+     "Кэш-пулинг": 0.244
+    },
+    "ranking_after": {
+     "Оборотный кредит": 0.503,
+     "Депозит": 0.304,
+     "Кэш-пулинг": 0.244,
+     "Факторинг": 0.15,
+     "Лизинг": 0.054
+    },
+    "rule_trace": [
+     "1 Допуск: нет ВЭД-признаков (ФТС) — ВЭД отсеян",
+     "2 Окно: уверенность прогноза 0.54 < 0,7 — работает текущий процесс",
+     "5 Структура: свободных денег группы 0.0 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Собственник (модель ЛПР (CRM пуста))",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — да, push — да, звонок — да",
+     "6 Частота: один бриф менеджеру на цикл потребности"
+    ],
+    "manager_contact": "Звонок с предложением",
+    "journey_adaptation": {
+     "rule_id": "J4",
+     "signal": "Сложная форма",
+     "adaptation": "«Заполнит менеджер», сохранить черновик, подсказки к полям"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P9",
+   "label": "Последняя сессия: долгая пауза и правки суммы в калькуляторе — адаптивный путь (доп. задание)",
+   "source_company_id": "U_176017",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_176017",
+    "industry": "Оптовая торговля",
+    "okved": "46.73.6",
+    "season_type": "construction_trade",
+    "size_segment": "Средний",
+    "revenue_company_mln": 10.0,
+    "region": "Пензенская область",
+    "ved_allowed": 0,
+    "supplier_of_seasonal": 0,
+    "seasonal_payer_share": 0.0,
+    "products": [],
+    "history_months": 24
+   },
+   "structure": {
+    "group_id": "group_93094_sb",
+    "group_size": 37,
+    "is_head_company": 0,
+    "holding_flag": 1,
+    "group_main_industry": "АПК",
+    "group_n_industries": 10,
+    "revenue_group_mln": 4803.2,
+    "group_free_cash_mln": 0.0
+   },
+   "forecast": {
+    "gap_date": "2026-11-13",
+    "weeks_to_gap": 2.6,
+    "gap_amount_mln": 1.5,
+    "confidence": 0.82,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "FS_12650",
+     "role_crm": null,
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.72,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 0
+    },
+    {
+     "user_id": "FS_12651",
+     "role_crm": "Финансовый директор",
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.93,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 1,
+     "ib_active_days_30d": 1,
+     "boss_active_days_30d": 7,
+     "digital_type": "Смешанный",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 1,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_12652",
+     "role_crm": "Главный бухгалтер",
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.87,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 16,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_12653",
+     "role_crm": "Бухгалтер",
+     "role_model_pred": "Бухгалтер",
+     "role_model_confidence": 0.7,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 19,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_12654",
+     "role_crm": "Операционист",
+     "role_model_pred": "Операционист",
+     "role_model_confidence": 0.91,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 12,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 1,
+     "consent_ads_email": 1,
+     "consent_ads_push": 1,
+     "consent_ads_sms": 1,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.256,
+    "Факторинг": 0.25,
+    "Депозит": 0.121,
+    "ВЭД": 0.363,
+    "Лизинг": 0.152,
+    "Кэш-пулинг": 0.274
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 0.6,
+     "rate_from": 19.8
+    },
+    "Факторинг": {
+     "limit_mln": 1.5,
+     "rate_from": 18.0
+    },
+    "Лизинг": {
+     "limit_mln": 1.2,
+     "rate_from": 18.2
+    }
+   },
+   "journey_last_session": {
+    "session_id": "S_1955",
+    "user_id": "FS_12651",
+    "app": "Альфа-Босс",
+    "product": "Оборотный кредит",
+    "started_at": "2026-08-25 08:13:26",
+    "duration_sec": 305,
+    "n_back": 2,
+    "max_pause_sec": 116,
+    "n_calc_changes": 4,
+    "n_product_sections": 0,
+    "n_field_errors": 0,
+    "draft_saved": 0,
+    "submitted": 0,
+    "n_steps": 12
+   },
+   "comm_last_30d": 1,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Оборотный кредит",
+    "path": "Г1, группа C: записка через бухгалтера",
+    "addressee_lpr": "FS_12651",
+    "addressee_lpr_role": "Финансовый директор",
+    "note_to": "FS_12653",
+    "channels": [
+     "Записка бухгалтеру в «Альфа-Бизнесе» (FS_12653)",
+     "Карточка ЛПР в «Альфа-Боссе» (FS_12651)",
+     "Менеджер (холдинг)"
+    ],
+    "frequency": "Одна записка на цикл потребности; карточка ЛПР не чаще раза в 2 недели и повторно только после ответа; холдинг — один лимит сообщений на группу",
+    "texts": {
+     "Бухгалтеру": "13 ноября у компании может не хватить 1,5 млн ₽ на платежи поставщикам. Заявка на кредитную линию заполнена — нужна подпись руководителя.",
+     "ЛПР": "Предварительное предложение: кредитная линия 1,5 млн ₽ до 13 ноября — перед сезоном стройки, поручительство группы. Решение банк примет после заявки.",
+     "Почему вы это видите": "Прогноз по оборотам на ваших счетах в Альфа-Банке"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.256,
+     "Факторинг": 0.25,
+     "Депозит": 0.121,
+     "ВЭД": 0.363,
+     "Лизинг": 0.152,
+     "Кэш-пулинг": 0.274
+    },
+    "ranking_after": {
+     "Оборотный кредит": 0.573,
+     "Факторинг": 0.35,
+     "Кэш-пулинг": 0.274,
+     "Лизинг": 0.152,
+     "Депозит": 0.121
+    },
+    "rule_trace": [
+     "1 Допуск: нет ВЭД-признаков (ФТС) — ВЭД отсеян",
+     "2 Окно: разрыв через 2.6 нед. — оборотный ×1,6",
+     "3 Отрасль: сезонность «construction_trade» — оборотный и факторинг ×1,4",
+     "5 Структура: свободных денег группы 0.0 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Финансовый директор (CRM)",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — да, push — да, звонок — да",
+     "6 Частота: Одна записка на цикл потребности; карточка ЛПР не чаще раза в 2 недели и повторно только после ответа; холдинг — один лимит сообщений на группу"
+    ],
+    "manager_contact": "Звонок с предложением",
+    "journey_adaptation": {
+     "rule_id": "J1",
+     "signal": "Сомнение",
+     "adaptation": "Подсказка «сумма посчитана по вашим оборотам», предзаполнить калькулятор, кнопка «обсудить с менеджером»"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  },
+  {
+   "profile_id": "P10",
+   "label": "Нет согласий на рекламу по email, push и звонкам — только интернет-банк и сервисный контакт менеджера",
+   "source_company_id": "U_131725",
+   "as_of_date": "2026-10-26",
+   "company": {
+    "company_id": "U_131725",
+    "industry": "Оптовая торговля",
+    "okved": "46.74.3",
+    "season_type": "construction_trade",
+    "size_segment": "Средний",
+    "revenue_company_mln": 683.2,
+    "region": "Саратовская область",
+    "ved_allowed": 0,
+    "supplier_of_seasonal": 1,
+    "seasonal_payer_share": 0.343,
+    "products": [],
+    "history_months": 24
+   },
+   "structure": {
+    "group_id": "group_85247_sb",
+    "group_size": 3,
+    "is_head_company": 1,
+    "holding_flag": 0,
+    "group_main_industry": "Оптовая торговля",
+    "group_n_industries": 2,
+    "revenue_group_mln": 683.8,
+    "group_free_cash_mln": 0.0
+   },
+   "forecast": {
+    "gap_date": "2026-11-25",
+    "weeks_to_gap": 4.3,
+    "gap_amount_mln": 149.7,
+    "confidence": 0.73,
+    "method": "история компании"
+   },
+   "users": [
+    {
+     "user_id": "F_58928",
+     "role_crm": "Собственник",
+     "role_model_pred": "Генеральный директор",
+     "role_model_confidence": 0.42,
+     "is_egrul_head_or_founder": 1,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 0,
+     "boss_active_days_30d": 0,
+     "digital_type": "Через менеджера",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_8726",
+     "role_crm": "Финансовый директор",
+     "role_model_pred": "Финансовый директор",
+     "role_model_confidence": 0.8,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Первая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 5,
+     "boss_active_days_30d": 0,
+     "digital_type": "Смешанный",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_8727",
+     "role_crm": "Главный бухгалтер",
+     "role_model_pred": "Главный бухгалтер",
+     "role_model_confidence": 0.76,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Вторая подпись",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 7,
+     "boss_active_days_30d": 0,
+     "digital_type": "Смешанный",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    },
+    {
+     "user_id": "FS_8728",
+     "role_crm": "Бухгалтер",
+     "role_model_pred": "Собственник",
+     "role_model_confidence": 0.37,
+     "is_egrul_head_or_founder": 0,
+     "sign_rights": "Создание платежей",
+     "has_alfa_business": 1,
+     "has_alfa_boss": 0,
+     "ib_active_days_30d": 22,
+     "boss_active_days_30d": 0,
+     "digital_type": "Цифровой",
+     "optout_all": 0,
+     "inapp_offers_hidden": 0,
+     "consent_ads_email": 0,
+     "consent_ads_push": 0,
+     "consent_ads_sms": 0,
+     "consent_ads_call": 0,
+     "has_email_contact": 1,
+     "push_enabled": 1
+    }
+   ],
+   "asis_scores": {
+    "Оборотный кредит": 0.359,
+    "Факторинг": 0.063,
+    "Депозит": 0.097,
+    "ВЭД": 0.01,
+    "Лизинг": 0.088,
+    "Кэш-пулинг": 0.097
+   },
+   "preapproved": {
+    "Оборотный кредит": {
+     "limit_mln": 54.8,
+     "rate_from": 17.7
+    },
+    "Факторинг": {
+     "limit_mln": 97.0,
+     "rate_from": 21.0
+    },
+    "Лизинг": {
+     "limit_mln": 53.1,
+     "rate_from": 23.5
+    }
+   },
+   "journey_last_session": null,
+   "comm_last_30d": 3,
+   "expected_output": {
+    "action": "Показать предложение",
+    "offer": "Оборотный кредит",
+    "path": "Тип активности ЛПР: Смешанный",
+    "addressee_lpr": "FS_8726",
+    "addressee_lpr_role": "Финансовый директор",
+    "note_to": "FS_8728",
+    "channels": [
+     "Интернет-банк"
+    ],
+    "frequency": "Интернет-банк раз в неделю, затем бриф менеджеру (email — нет согласия)",
+    "texts": {
+     "ЛПР": "Предварительное предложение: кредитная линия 149,7 млн ₽ до 25 ноября — перед сезоном стройки, поручительство группы. Решение банк примет после заявки.",
+     "Почему вы это видите": "Прогноз по оборотам на ваших счетах в Альфа-Банке"
+    },
+    "ranking_before": {
+     "Оборотный кредит": 0.359,
+     "Факторинг": 0.063,
+     "Депозит": 0.097,
+     "ВЭД": 0.01,
+     "Лизинг": 0.088,
+     "Кэш-пулинг": 0.097
+    },
+    "ranking_after": {
+     "Оборотный кредит": 0.804,
+     "Депозит": 0.097,
+     "Кэш-пулинг": 0.097,
+     "Факторинг": 0.088,
+     "Лизинг": 0.088
+    },
+    "rule_trace": [
+     "1 Допуск: нет ВЭД-признаков (ФТС) — ВЭД отсеян",
+     "2 Окно: разрыв через 4.3 нед. — оборотный ×1,6",
+     "3 Отрасль: сезонность «construction_trade» — оборотный и факторинг ×1,4",
+     "5 Структура: свободных денег группы 0.0 млн мало — кредит, поручители — юрлица группы",
+     "4 Роль: ЛПР — Финансовый директор (CRM)",
+     "1 Допуск (каналы ЛПР): в приложении — да, email — нет согласия, push — нет согласия, звонок — только сервисный контакт",
+     "6 Частота: Интернет-банк раз в неделю, затем бриф менеджеру (email — нет согласия)"
+    ],
+    "manager_contact": null,
+    "journey_adaptation": {
+     "rule_id": null,
+     "signal": "Нет данных о сессиях",
+     "adaptation": "Стандартный путь"
+    },
+    "fallback": "Записку не переслали за 5 дней — карточка ЛПР напрямую; «Не сейчас» — пауза 30 дней"
+   }
+  }
+ ],
+ "hooks": {
+  "agro": "до начала посевной",
+  "agro_trade": "перед пиком отгрузок аграриям",
+  "construction": "до старта строительного сезона",
+  "construction_trade": "перед сезоном стройки",
+  "food": "к закупке сырья нового урожая",
+  "flat": ""
+ },
+ "templates": [
+  {
+   "template_id": "T01",
+   "product": "Оборотный кредит",
+   "trigger": "Разрыв в окне 2–6 нед.",
+   "role": "Бухгалтер",
+   "channel": "Записка в «Альфа-Бизнесе»",
+   "title": "Записка для руководителя",
+   "body": "{gap_date} у компании может не хватить {amount_mln} млн ₽ на платежи поставщикам. Заявка на кредитную линию заполнена — нужна подпись руководителя.",
+   "buttons": "Переслать руководителю | Не сейчас",
+   "why_you_see_this": "Прогноз по оборотам на счетах компании в Альфа-Банке",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T02",
+   "product": "Оборотный кредит",
+   "trigger": "Разрыв в окне 2–6 нед.",
+   "role": "Финансовый директор",
+   "channel": "Карточка в «Альфа-Боссе»",
+   "title": "Предварительное предложение",
+   "body": "Кредитная линия {amount_mln} млн ₽ до {gap_date} — {hook}{guarantee}. Решение банк примет после заявки.",
+   "buttons": "Одобрить подачу | Обсудить с менеджером | Не сейчас",
+   "why_you_see_this": "Прогноз по оборотам на счетах компании в Альфа-Банке",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T03",
+   "product": "Оборотный кредит",
+   "trigger": "Разрыв в окне 2–6 нед.",
+   "role": "Собственник",
+   "channel": "Карточка в «Альфа-Боссе»",
+   "title": "Предварительное предложение",
+   "body": "Линия {amount_mln} млн ₽ к {gap_date}: рост без изъятия денег из оборота. Решение банк примет после заявки.",
+   "buttons": "Одобрить подачу | Обсудить с менеджером | Не сейчас",
+   "why_you_see_this": "Прогноз по оборотам на счетах компании в Альфа-Банке",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T04",
+   "product": "Оборотный кредит",
+   "trigger": "Разрыв вне окна",
+   "role": "Финансовый директор",
+   "channel": "Баннер в ИБ / email",
+   "title": "Подготовьтесь к сезону заранее",
+   "body": "По оборотам прошлого года к {gap_date} понадобится около {amount_mln} млн ₽ — {hook}. Линию можно открыть заранее.",
+   "buttons": "Рассчитать",
+   "why_you_see_this": "Прогноз по оборотам на счетах компании в Альфа-Банке",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T05",
+   "product": "Льготный кредит АПК",
+   "trigger": "Разрыв в окне 2–6 нед.",
+   "role": "Собственник",
+   "channel": "Карточка в «Альфа-Боссе»",
+   "title": "Льготный кредит к посевной",
+   "body": "{amount_mln} млн ₽ до {gap_date} по льготной ставке в пределах лимита субсидий. Решение банк примет после заявки.",
+   "buttons": "Одобрить подачу | Обсудить",
+   "why_you_see_this": "Сезон и прогноз по оборотам",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T06",
+   "product": "Кэш-пулинг",
+   "trigger": "Деньги группы покрывают разрыв",
+   "role": "Финансовый директор",
+   "channel": "Карточка в «Альфа-Боссе» + менеджер",
+   "title": "Закройте разрыв деньгами группы",
+   "body": "В группе свободно {free_cash_mln} млн ₽, а одной из компаний к {gap_date} не хватит {amount_mln} млн ₽. Кэш-пулинг — без кредита и процентов.",
+   "buttons": "Обсудить с менеджером | Не сейчас",
+   "why_you_see_this": "Остатки и прогноз по компаниям группы, к которым у вас есть доступ",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T07",
+   "product": "Факторинг",
+   "trigger": "Сезон отгрузок",
+   "role": "Финансовый директор",
+   "channel": "Баннер в ИБ / email",
+   "title": "Деньги сразу после отгрузки",
+   "body": "Факторинг до {limit_mln} млн ₽ — {hook}. Покупатели платят по-прежнему с отсрочкой.",
+   "buttons": "Рассчитать",
+   "why_you_see_this": "Подобрано по профилю компании",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T08",
+   "product": "Лизинг",
+   "trigger": "Сезон стройки",
+   "role": "Собственник",
+   "channel": "Карточка в «Альфа-Боссе» / email",
+   "title": "Техника к сезону",
+   "body": "Лизинг до {limit_mln} млн ₽ без разового платежа — {hook}.",
+   "buttons": "Рассчитать | Обсудить",
+   "why_you_see_this": "Подобрано по профилю компании",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T09",
+   "product": "Депозит",
+   "trigger": "После пика поступлений",
+   "role": "Финансовый директор",
+   "channel": "Баннер в ИБ",
+   "title": "Свободные деньги работают",
+   "body": "Остаток без движения можно разместить онлайн от {rate_from} % годовых.",
+   "buttons": "Открыть депозит",
+   "why_you_see_this": "Остатки на счетах компании",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T10",
+   "product": "ВЭД",
+   "trigger": "Есть валютные операции",
+   "role": "Финансовый директор",
+   "channel": "Баннер в ИБ",
+   "title": "Валютные платежи в одном окне",
+   "body": "Платежи, конвертация и валютный контроль без визитов в банк.",
+   "buttons": "Подробнее",
+   "why_you_see_this": "Компания ведёт внешнеэкономическую деятельность",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T11",
+   "product": "Сервисное уведомление",
+   "trigger": "Отказ от рекламы",
+   "role": "Финансовый директор",
+   "channel": "Уведомление в ИБ (сервисное)",
+   "title": "Прогноз движения денег",
+   "body": "По прогнозу к {gap_date} остаток на счетах может опуститься ниже обычного уровня.",
+   "buttons": "Открыть прогноз",
+   "why_you_see_this": "Сервис прогноза денежного потока",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  },
+  {
+   "template_id": "T12",
+   "product": "Оборотный кредит",
+   "trigger": "Бриф менеджеру",
+   "role": "Менеджер",
+   "channel": "CRM",
+   "title": "Повод для звонка",
+   "body": "{company}: разрыв {amount_mln} млн ₽ к {gap_date}, уверенность {confidence}. ЛПР — {lpr_role}; аргумент: {argument}.",
+   "buttons": "Позвонить | Отложить",
+   "why_you_see_this": "Внутренний бриф, клиенту не показывается",
+   "legal_note": "«Предварительное предложение», не оферта; без названий контрагентов; ссылка «не показывать»"
+  }
+ ],
+ "contact_policy": [
+  {
+   "client_type_or_event": "Все",
+   "channels": "Все каналы",
+   "limit": "Одно предложение по продукту в одном канале за 7 дней; общий лимит на все каналы",
+   "consent_required": "",
+   "note": "Правила банка о частоте"
+  },
+  {
+   "client_type_or_event": "Группа компаний",
+   "channels": "Все каналы",
+   "limit": "Один лимит сообщений на группу, не на юрлицо",
+   "consent_required": "",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Цифровой (≥ 12 активных дней в ИБ/«Альфа-Боссе» за 30 дней)",
+   "channels": "ИБ, push",
+   "limit": "До 2 предложений в неделю",
+   "consent_required": "push — согласие на рекламу (38-ФЗ ст.18)",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Смешанный (4–11 дней)",
+   "channels": "ИБ, email, затем менеджер",
+   "limit": "Раз в неделю; после 2 недель без реакции — менеджер",
+   "consent_required": "email — согласие на рекламу",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Через менеджера (< 4 дней)",
+   "channels": "Менеджер",
+   "limit": "Один бриф на цикл потребности",
+   "consent_required": "звонок с рекламой — согласие",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Холдинг (≥ 5 юрлиц или выручка группы ≥ 10 млрд ₽)",
+   "channels": "Менеджер + «Альфа-Босс»",
+   "limit": "Карточка не чаще раза в 2 недели",
+   "consent_required": "",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Окно разрыва (2–6 нед.)",
+   "channels": "По типу клиента",
+   "limit": "2–3 сообщения за окно",
+   "consent_required": "",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Вне окна",
+   "channels": "По типу клиента",
+   "limit": "Кредит — не чаще раза в месяц",
+   "consent_required": "",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "После «Не сейчас»",
+   "channels": "Все",
+   "limit": "Пауза по продукту 30 дней",
+   "consent_required": "",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "После скрытия / неинтереса",
+   "channels": "Все",
+   "limit": "Пауза по предложению 14 дней",
+   "consent_required": "",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Отказ от рекламы",
+   "channels": "Все",
+   "limit": "Только сервисные уведомления",
+   "consent_required": "Отзыв согласия — 152-ФЗ ст.9, 38-ФЗ ст.18",
+   "note": ""
+  },
+  {
+   "client_type_or_event": "Push",
+   "channels": "Push",
+   "limit": "Не отправлять с 21:00 до 9:00 по времени клиента",
+   "consent_required": "",
+   "note": ""
+  }
+ ],
+ "journey_rules": [
+  {
+   "rule_id": "J1",
+   "trigger": "Пауза ≥ 40 с на карточке или в калькуляторе, либо ≥ 3 изменения суммы",
+   "signal": "Сомнение",
+   "adaptation": "Подсказка «сумма посчитана по вашим оборотам», предзаполнение, кнопка «обсудить с менеджером»",
+   "ux_metric": "Доля дошедших до заявки, время до заявки"
+  },
+  {
+   "rule_id": "J2",
+   "trigger": "≥ 2 возврата назад за сессию",
+   "signal": "Не нашёл информацию",
+   "adaptation": "Блок FAQ «чем линия отличается от кредита» над калькулятором",
+   "ux_metric": "Возвраты на сессию"
+  },
+  {
+   "rule_id": "J3",
+   "trigger": "Открыл ≥ 3 разделов витрины",
+   "signal": "Сравнение",
+   "adaptation": "Поднять блок сравнения продуктов под задачу (разрыв)",
+   "ux_metric": "Доля дошедших до заявки"
+  },
+  {
+   "rule_id": "J4",
+   "trigger": "≥ 2 ошибки в полях заявки",
+   "signal": "Сложная форма",
+   "adaptation": "«Заполнит менеджер», сохранение черновика, подсказки к полям",
+   "ux_metric": "Брошенные заявки"
+  },
+  {
+   "rule_id": "J5",
+   "trigger": "Сохранил черновик и не вернулся 3 дня",
+   "signal": "Отложил",
+   "adaptation": "«Догоняшка» с заполненным черновиком (уже есть в банке)",
+   "ux_metric": "Возврат к черновику"
+  },
+  {
+   "rule_id": "J6",
+   "trigger": "Сессия < 60 с, прокрутка < 30 %, выход",
+   "signal": "Неинтерес",
+   "adaptation": "Не показывать предложение 14 дней",
+   "ux_metric": "Скрытия, отписки"
+  },
+  {
+   "rule_id": "J7",
+   "trigger": "Прошёл до заявки без пауз",
+   "signal": "Нет сложностей",
+   "adaptation": "Кнопка «Подать заявку» прямо на карточке",
+   "ux_metric": "Время до заявки"
+  }
+ ],
+ "rules_params": [
+  {
+   "param": "window_weeks_min",
+   "value": "2.0",
+   "meaning": "Начало окна, недель до разрыва"
+  },
+  {
+   "param": "window_weeks_max",
+   "value": "6.0",
+   "meaning": "Конец окна"
+  },
+  {
+   "param": "window_multiplier",
+   "value": "1.6",
+   "meaning": "Множитель оборотного кредита в окне"
+  },
+  {
+   "param": "industry_multiplier",
+   "value": "1.4",
+   "meaning": "Множитель отраслевого продукта"
+  },
+  {
+   "param": "forecast_confidence_min",
+   "value": "0.7",
+   "meaning": "Ниже — без записки, текущий процесс"
+  },
+  {
+   "param": "do_nothing_threshold",
+   "value": "0.2",
+   "meaning": "Ниже — «ничего не делать»"
+  },
+  {
+   "param": "role_model_confidence_min",
+   "value": "0.6",
+   "meaning": "Ниже — роль по ЕГРЮЛ"
+  },
+  {
+   "param": "role_model_override_confidence",
+   "value": "0.9",
+   "meaning": "Модель перебивает CRM при расхождении"
+  },
+  {
+   "param": "not_now_pause_days",
+   "value": "30.0",
+   "meaning": "Пауза после «не сейчас»"
+  },
+  {
+   "param": "note_forward_timeout_days",
+   "value": "5.0",
+   "meaning": "Не переслали записку — карточка ЛПР напрямую"
+  },
+  {
+   "param": "lpr_card_min_interval_days",
+   "value": "14.0",
+   "meaning": "Интервал карточек ЛПР"
+  },
+  {
+   "param": "supplier_share_threshold",
+   "value": "0.3",
+   "meaning": "Порог доли поступлений от сезонных отраслей"
+  },
+  {
+   "param": "holding_min_entities",
+   "value": "5.0",
+   "meaning": "Холдинг: число юрлиц"
+  },
+  {
+   "param": "holding_min_group_revenue_rub",
+   "value": "10000000000.0",
+   "meaning": "Холдинг: выручка группы"
+  },
+  {
+   "param": "cash_buffer_months",
+   "value": "0.25",
+   "meaning": "Минимальный остаток = 0,25 месячной выручки"
+  }
+ ],
+ "role_matrix": [
+  {
+   "product": "Оборотный кредит / линия",
+   "role": "Финансовый директор",
+   "decision": "Решает",
+   "argument": "Сумма, срок и что закрывает разрыв",
+   "for_other_roles": ""
+  },
+  {
+   "product": "Оборотный кредит / линия",
+   "role": "Собственник",
+   "decision": "Решает при крупной сумме",
+   "argument": "Рост без изъятия денег из оборота",
+   "for_other_roles": ""
+  },
+  {
+   "product": "Оборотный кредит / линия",
+   "role": "Главный бухгалтер",
+   "decision": "Готовит документы",
+   "argument": "Заявка заполнена, нужна подпись",
+   "for_other_roles": "Записка «переслать руководителю»"
+  },
+  {
+   "product": "Оборотный кредит / линия",
+   "role": "Бухгалтер",
+   "decision": "Не решает",
+   "argument": "Платежи поставщикам пройдут вовремя",
+   "for_other_roles": "Записка «переслать руководителю»"
+  },
+  {
+   "product": "Льготный кредит АПК",
+   "role": "Собственник",
+   "decision": "Решает",
+   "argument": "Деньги к посевной по льготной ставке в пределах лимита",
+   "for_other_roles": ""
+  },
+  {
+   "product": "Кэш-пулинг",
+   "role": "Финансовый директор",
+   "decision": "Решает",
+   "argument": "Разрыв закрывается деньгами группы, без процентов",
+   "for_other_roles": "Собственнику — экономия на процентах"
+  },
+  {
+   "product": "Факторинг",
+   "role": "Финансовый директор",
+   "decision": "Решает",
+   "argument": "Оплата от покупателей сразу после отгрузки",
+   "for_other_roles": "Продажам — отсрочка для покупателя без потери денег"
+  },
+  {
+   "product": "Лизинг",
+   "role": "Собственник",
+   "decision": "Решает",
+   "argument": "Техника к сезону без разового платежа",
+   "for_other_roles": "Закупкам — сроки поставки"
+  },
+  {
+   "product": "Лизинг",
+   "role": "Руководитель закупок",
+   "decision": "Участвует",
+   "argument": "Техника к сезону",
+   "for_other_roles": ""
+  },
+  {
+   "product": "Депозит / остаток",
+   "role": "Финансовый директор",
+   "decision": "Решает",
+   "argument": "Свободные деньги приносят доход",
+   "for_other_roles": "Бухгалтеру — автоовернайт"
+  },
+  {
+   "product": "ВЭД",
+   "role": "Финансовый директор",
+   "decision": "Решает",
+   "argument": "Курс и сроки расчётов",
+   "for_other_roles": ""
+  },
+  {
+   "product": "ВЭД",
+   "role": "Главный бухгалтер",
+   "decision": "Участвует",
+   "argument": "Валютный контроль в одном окне",
+   "for_other_roles": ""
+  }
+ ]
+}
