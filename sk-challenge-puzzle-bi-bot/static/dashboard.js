@@ -3,37 +3,12 @@
 // Формулы вычисляются тем же алгоритмом, что и в Python: дерево {op, a, b}, без eval.
 
 const MEASURE_KEYS = ['plan', 'fact', 'qty', 'discount', 'deals'];
-const COLORS = { plan: '#1E2B6F', fact: '#1E2B6F', ly: '#C3CAE6', good: '#12A150', bad: '#E5383B', accent: '#3D5AFE', ink: '#141B34', soft: '#5B6488', grid: '#EEF1F7' };
+const COLORS = { plan: '#1E2B6F', fact: '#3D5AFE', planSoft: '#D9E0FF', ly: '#9AA6CF', good: '#1FA36B', bad: '#EC4A5A', accent: '#3D5AFE', ink: '#141B34', soft: '#5B6488', grid: '#EDEFF3' };
 function shiftYear(key) {
   if (/^\d{4}-\d{2}$/.test(key)) return monthAdd(key, -12);
   return String(+key.slice(0, 4) - 1) + key.slice(4);
 }
 function signed(v, unit) { return (v > 0 ? '+' : v < 0 ? '−' : '') + fmtNum(Math.abs(v), unit); }
-function sparkSvg(values, opts) {
-  const w = 150, h = 40, pad = 3;
-  const vals = values.map(v => isFinite(v) ? v : null);
-  const nums = vals.filter(v => v !== null).concat(opts.ref !== undefined ? [opts.ref] : []);
-  if (!nums.length) return '';
-  let lo = Math.min(...nums), hi = Math.max(...nums);
-  if (opts.bars) { lo = Math.min(lo, 0); hi = Math.max(hi, 0); }
-  if (hi === lo) hi = lo + 1;
-  const X = i => pad + i * (w - 2 * pad) / Math.max(1, vals.length - 1);
-  const Y = v => h - pad - (v - lo) / (hi - lo) * (h - 2 * pad);
-  let out = `<svg viewBox="0 0 ${w} ${h}" class="spark" aria-hidden="true">`;
-  if (opts.ref !== undefined) out += `<line x1="0" x2="${w}" y1="${Y(opts.ref)}" y2="${Y(opts.ref)}" stroke="${COLORS.soft}" stroke-dasharray="3 3" stroke-width="1"/>`;
-  if (opts.bars) {
-    const bw = (w - 2 * pad) / vals.length * 0.7;
-    vals.forEach((v, i) => { if (v === null) return; const x = pad + i * (w - 2 * pad) / vals.length; const y0 = Y(0), y1 = Y(v);
-      out += `<rect x="${x}" y="${Math.min(y0, y1)}" width="${bw}" height="${Math.max(1, Math.abs(y1 - y0))}" fill="${v >= 0 ? COLORS.good : COLORS.bad}"/>`; });
-  } else {
-    if (opts.second) { const p2 = opts.second.map((v, i) => isFinite(v) ? `${X(i)},${Y(v)}` : '').filter(Boolean).join(' '); out += `<polyline points="${p2}" fill="none" stroke="${COLORS.soft}" stroke-width="1.3" stroke-dasharray="4 3"/>`; }
-    const pts = vals.map((v, i) => v === null ? '' : `${X(i)},${Y(v)}`).filter(Boolean).join(' ');
-    out += `<polyline points="${pts}" fill="none" stroke="${opts.color || COLORS.fact}" stroke-width="2" stroke-linejoin="round"/>`;
-    const li = vals.length - 1;
-    if (vals[li] !== null) out += `<circle cx="${X(li)}" cy="${Y(vals[li])}" r="3.2" fill="${opts.color || COLORS.fact}"/>`;
-  }
-  return out + '</svg>';
-}
 const PALETTE = ['#3D5AFE', '#FF8A3D', '#12A150', '#9B5DE5', '#00B4D8', '#F15BB5', '#FFC300', '#6C757D', '#2EC4B6'];
 const MONTHS = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
 
@@ -187,7 +162,7 @@ function renderDashboard(el, payload, api) {
   const r = ui.range;
   head.innerHTML = `<div><div class="dash-title"></div><div class="dash-sub"></div></div>`;
   head.querySelector('.dash-title').textContent = st.name;
-  head.querySelector('.dash-sub').textContent = `Запрос: «${st.query}» · период ${periodLabel(r.start)} – ${periodLabel(r.end)}`.replace(' · ', ', ');
+  if (!/\d{4}/.test(st.name)) head.querySelector('.dash-sub').textContent = `${periodLabel(r.start)} – ${periodLabel(r.end)}`;
   if ((st.history || []).length) {
     const h = document.createElement('details');
     h.className = 'dash-hist';
@@ -200,6 +175,9 @@ function renderDashboard(el, payload, api) {
   const kpiBox = document.createElement('div');
   kpiBox.className = 'kpis';
   el.appendChild(kpiBox);
+  const insight = document.createElement('div');
+  insight.className = 'insight';
+  el.appendChild(insight);
 
   // ---------- фильтры и переключатели ----------
   const controls = document.createElement('div');
@@ -217,14 +195,18 @@ function renderDashboard(el, payload, api) {
 
   function multiSelect(dim) {
     const wrap = document.createElement('div');
-    wrap.className = 'ms';
+    wrap.className = 'ms ctl';
+    const cap = document.createElement('span');
+    cap.className = 'ctl-label';
+    cap.textContent = dimTitle[dim];
+    wrap.appendChild(cap);
     const btn = document.createElement('button');
     btn.className = 'ms-btn';
     const sel = () => ui.filters[dim] || [];
     const label = () => {
       const s = sel();
       btn.classList.toggle('active', s.length > 0);
-      btn.textContent = `${dimTitle[dim]}: ` + (s.length === 0 ? 'все' : s.length === 1 ? s[0] : `выбрано ${s.length}`) + ' ▾';
+      btn.textContent = s.length === 0 ? 'Все' : s.length === 1 ? s[0] : `Выбрано ${s.length}`;
     };
     label();
     wrap.appendChild(btn);
@@ -288,6 +270,7 @@ function renderDashboard(el, payload, api) {
 
   function seg(label, values, key) {
     const box = document.createElement('div');
+    box.className = 'ctl';
     box.innerHTML = `<span class="ctl-label">${label}</span>`;
     const s = document.createElement('div');
     s.className = 'seg';
@@ -303,6 +286,7 @@ function renderDashboard(el, payload, api) {
   }
   controls.appendChild(seg('Разрез', st.dim_options.filter(d => data.cols[d]).map(d => [d, dimTitle[d]]), 'dim'));
   const metricBox = document.createElement('div');
+  metricBox.className = 'ctl';
   metricBox.innerHTML = '<span class="ctl-label">Метрика</span>';
   const msel = document.createElement('select');
   msel.className = 'metric';
@@ -326,21 +310,21 @@ function renderDashboard(el, payload, api) {
   const chartEls = charts.map((c, i) => {
     const box = document.createElement('div');
     box.className = 'chart' + (charts.length >= 4 && i === 0 ? ' wide' : '');
-    box.innerHTML = `<div class="chart-title"><span class="chart-num">${i + 1}</span><span class="t"></span></div><div class="chart-plot"></div>`;
+    box.innerHTML = `<div class="chart-title"><span class="t"></span></div><div class="chart-plot"></div>`;
     grid.appendChild(box);
     return box;
   });
-  const insight = document.createElement('div');
-  insight.className = 'insight';
-  el.appendChild(insight);
+  const tableBox = document.createElement('div');
+  tableBox.className = 'chart dtable';
+  el.appendChild(tableBox);
 
   const baseLayout = () => ({
-    margin: { l: 56, r: 16, t: 10, b: 48 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
-    font: { family: 'Inter, sans-serif', size: 11.5, color: COLORS.ink }, separators: ', ',
-    legend: { orientation: 'h', y: 1.12, x: 0 }, hoverlabel: { bgcolor: '#fff', bordercolor: '#E3E7F1', font: { color: COLORS.ink } },
-    xaxis: { gridcolor: COLORS.grid, zeroline: false, automargin: true }, yaxis: { gridcolor: COLORS.grid, zeroline: false, automargin: true },
+    margin: { l: 48, r: 12, t: 8, b: 36 }, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+    font: { family: 'Inter, sans-serif', size: 12, color: COLORS.ink }, separators: ', ',
+    legend: { orientation: 'h', y: 1.1, x: 0, font: { size: 12 } }, hoverlabel: { bgcolor: '#fff', bordercolor: '#DDE1E8', font: { color: COLORS.ink, size: 12.5 } },
+    xaxis: { showgrid: false, zeroline: false, automargin: true, linecolor: '#DDE1E8', ticks: '' }, yaxis: { gridcolor: COLORS.grid, zeroline: false, automargin: true, ticks: '' },
   });
-  const cfg = { displaylogo: false, responsive: true, modeBarButtonsToRemove: ['lasso2d', 'select2d'] };
+  const cfg = { displaylogo: false, responsive: true, displayModeBar: false };
 
   function draw(plotEl, traces, layout, emptyText) {
     if (!traces.length || traces.every(t => !(t.x || t.values || []).length)) {
@@ -399,28 +383,18 @@ function renderDashboard(el, payload, api) {
         const [div, lab] = allRub ? rubScale(ids.flatMap(id => out[id])) : [1, ''];
         if (ids.join() === 'plan,fact') {
           const plan = out.plan, fact = out.fact;
-          const ly = keys.map(k => { const s0 = extMap.get(shiftYear(k)); return s0 ? s0.fact : NaN; });
-          const dev = keys.map((k, j) => fact[j] - plan[j]);
+          const ex = keys.map((k, j) => plan[j] ? fact[j] / plan[j] * 100 : NaN);
           traces = [
-            { type: 'bar', x, y: plan.map(v => v / div), name: 'План', width: 0.72, marker: { color: 'rgba(0,0,0,0)', line: { color: COLORS.plan, width: 1.6 } },
-              customdata: plan.map(v => fmtNum(v, '₽')), hovertemplate: '%{x}<br>План %{customdata}<extra></extra>' },
-            { type: 'bar', x, y: fact.map(v => v / div), name: 'Факт', width: 0.46, marker: { color: COLORS.fact },
-              customdata: fact.map(v => fmtNum(v, '₽')), hovertemplate: '%{x}<br>Факт %{customdata}<extra></extra>' },
-            { type: 'scatter', mode: 'markers', x, y: ly.map(v => v / div), name: 'Прошлый год', marker: { symbol: 'line-ew-open', size: 26, color: COLORS.soft, line: { width: 2.2, color: COLORS.soft } },
-              customdata: ly.map(v => fmtNum(v, '₽')), hovertemplate: '%{x}<br>Прошлый год %{customdata}<extra></extra>' },
-            { type: 'bar', x, y: dev.map(v => v / div), yaxis: 'y2', name: 'Отклонение', showlegend: false, width: 0.46,
-              marker: { color: dev.map(v => v >= 0 ? COLORS.good : COLORS.bad) },
-              text: dev.map(v => (v >= 0 ? '+' : '−') + (Math.abs(v) / div).toFixed(1).replace('.', ',')), textposition: 'outside', cliponaxis: false, textfont: { size: 10 },
-              customdata: dev.map(v => signed(v, '₽')), hovertemplate: '%{x}<br>Отклонение %{customdata}<extra></extra>' },
+            { type: 'bar', x, y: fact.map(v => v / div), name: 'Факт', width: 0.62, marker: { color: fact.map((v, j) => v >= plan[j] ? COLORS.fact : COLORS.fact), cornerradius: 4 },
+              text: ex.map(v => isFinite(v) ? v.toFixed(0) + '%' : ''), textposition: 'inside', insidetextanchor: 'end', textfont: { color: '#fff', size: 11 },
+              customdata: fact.map((v, j) => [fmtNum(v, '₽'), fmtNum(plan[j], '₽'), signed(v - plan[j], '₽'), fmtNum(ex[j], '%')]),
+              hovertemplate: '<b>%{x}</b><br>Факт %{customdata[0]}<br>План %{customdata[1]}<br>Отклонение %{customdata[2]}<br>Выполнение %{customdata[3]}<extra></extra>' },
+            { type: 'scatter', mode: 'lines+markers', x, y: plan.map(v => v / div), name: 'План', line: { color: COLORS.plan, width: 2 }, marker: { size: 6, color: COLORS.plan }, hoverinfo: 'skip' },
           ];
-          L.barmode = 'overlay';
-          L.yaxis.domain = [0, 0.7];
-          L.yaxis.title = { text: lab, font: { size: 11 } };
-          const dmax = Math.max(...dev.map(v => Math.abs(v) / div), 0.1) * 1.6;
-          L.yaxis2 = { domain: [0.8, 1], range: [-dmax, dmax], showticklabels: false, zeroline: true, zerolinecolor: COLORS.soft, showgrid: false, anchor: 'x' };
-          L.annotations = [{ xref: 'paper', yref: 'paper', x: 0, y: 1.02, xanchor: 'left', showarrow: false, text: 'Отклонение от плана, ' + lab, font: { size: 10.5, color: COLORS.soft } }];
-          L.legend = { orientation: 'h', y: -0.2, x: 0.5, xanchor: 'center' };
-          tEl.textContent = `Факт и план по периодам, ${periodLabel(keys[0] || '')} – ${periodLabel(keys[keys.length - 1] || '')}`;
+          L.legend = { orientation: 'h', y: 1.1, x: 0 };
+          L.yaxis.title = { text: lab, font: { size: 11.5 } };
+          L.bargap = 0.3;
+          tEl.textContent = `Факт и план по периодам`;
           L.xaxis.type = 'category';
           draw(plotEl, traces, L);
           return;
@@ -429,12 +403,12 @@ function renderDashboard(el, payload, api) {
         if (ids.length === 1 && metricById[ids[0]] && metricById[ids[0]].kind === 'measure') {
           const id0 = ids[0];
           const ly = keys.map(k => { const s0 = extMap.get(shiftYear(k)); return s0 ? s0[id0] : NaN; });
-          L.legend = { orientation: 'h', y: -0.15, x: 0.5, xanchor: 'center' };
+          L.legend = { orientation: 'h', y: 1.1, x: 0 };
           L.xaxis.type = 'category';
           draw(plotEl, [
-            { type: 'bar', x, y: out[id0].map(v => v / div), name: titleOf(id0).split(',')[0], width: 0.55, marker: { color: COLORS.fact },
+            { type: 'bar', x, y: out[id0].map(v => v / div), name: titleOf(id0).split(',')[0], width: 0.6, marker: { color: COLORS.fact, cornerradius: 4 },
               customdata: out[id0].map(v => fmtNum(v, unitOf(id0))), hovertemplate: '%{x}<br>%{customdata}<extra></extra>' },
-            { type: 'scatter', mode: 'markers', x, y: ly.map(v => v / div), name: 'Прошлый год', marker: { symbol: 'line-ew-open', size: 30, color: COLORS.soft, line: { width: 2.2, color: COLORS.soft } },
+            { type: 'scatter', mode: 'lines', x, y: ly.map(v => v / div), name: 'Прошлый год', line: { color: COLORS.ly, width: 2, dash: 'dot' },
               customdata: ly.map(v => fmtNum(v, unitOf(id0))), hovertemplate: '%{x}<br>Прошлый год %{customdata}<extra></extra>' }], L);
           tEl.textContent = c.title;
           return;
@@ -459,22 +433,20 @@ function renderDashboard(el, payload, api) {
       const xs = keys.map(periodLabel);
       const lastI = y.length - 1;
       if (lastI >= 0 && isFinite(y[lastI])) L.annotations = [{ x: xs[lastI], y: y[lastI], text: fmtNum(y[lastI], unit), showarrow: false, yshift: 16, font: { size: 12, color: COLORS.ink } }];
-      const traces = [{ type: 'scatter', mode: 'lines+markers', x: xs, y, name: titleOf(id), line: { color: COLORS.accent, width: 3, shape: 'spline', smoothing: 0.5 }, fill: ref !== null ? 'none' : 'tozeroy', fillcolor: 'rgba(61,90,254,.08)',
+      const traces = [{ type: 'scatter', mode: 'lines+markers', x: xs, y, name: titleOf(id), line: { color: COLORS.accent, width: 2.5 }, fill: ref !== null ? 'none' : 'tozeroy', fillcolor: 'rgba(61,90,254,.08)',
         marker: { size: 7, color: y.map(v => ref === null ? COLORS.fact : v >= ref ? COLORS.good : COLORS.bad) },
         customdata: y.map(v => fmtNum(v, unit)), hovertemplate: '%{x}<br>%{customdata}<extra></extra>' }];
       if (ref !== null) {
-        L.shapes = [{ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: ref, y1: ref, line: { color: COLORS.ink, dash: 'dot', width: 1.2 } }];
+        L.shapes = [{ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: ref, y1: ref, line: { color: COLORS.plan, dash: 'dash', width: 1.2 } }];
         const vals = y.filter(isFinite);
         if (vals.length) {
           const lo = Math.min(...vals, ref), hi = Math.max(...vals, ref), pad = (hi - lo) * .15 + 1;
           L.yaxis.range = [lo - pad, hi + pad];
-          L.shapes.push({ type: 'rect', xref: 'paper', x0: 0, x1: 1, y0: ref, y1: hi + pad, fillcolor: COLORS.good, opacity: .06, line: { width: 0 } });
-          L.shapes.push({ type: 'rect', xref: 'paper', x0: 0, x1: 1, y0: lo - pad, y1: ref, fillcolor: COLORS.bad, opacity: .06, line: { width: 0 } });
         }
       }
       L.xaxis.type = 'category';
-      L.xaxis.tickangle = -40;
-      L.xaxis.nticks = 8;
+      L.xaxis.tickangle = 0;
+      L.xaxis.nticks = 6;
       L.showlegend = false;
       tEl.textContent = c.title.startsWith('Динамика выполнения') || c.title.startsWith('Выполнение') ? (isExec ? c.title : 'Динамика: ' + titleOf(id)) : c.title;
       draw(plotEl, traces, L);
@@ -498,18 +470,19 @@ function renderDashboard(el, payload, api) {
       const total = items.reduce((t, x0) => t + x0[1], 0) || 1;
       const rev = items.slice().reverse();
       const names = rev.map(x0 => x0[0].length > 30 ? x0[0].slice(0, 28) + '…' : x0[0]);
-      const h = Math.max(300, items.length * 34 + 60);
+      const h = Math.max(280, items.length * 32 + 40);
       plotEl.style.height = h + 'px';
       L.height = h;
       const traces = [{ type: 'bar', orientation: 'h', y: names, x: rev.map(x0 => x0[1] / total * 100),
-        marker: { color: rev.map((x0, j) => j === rev.length - 1 ? COLORS.accent : COLORS.fact), opacity: 0.92 },
+        marker: { color: COLORS.fact, cornerradius: 3 },
         text: rev.map(x0 => (x0[1] / total * 100).toFixed(1).replace('.', ',') + '%'), textposition: 'outside', cliponaxis: false,
         customdata: rev.map(x0 => fmtNum(x0[1], unitOf(pm))), hovertemplate: '%{y}<br>%{customdata}, %{text}<extra></extra>' }];
       L.showlegend = false;
       L.margin = { l: 10, r: 60, t: 6, b: 20 };
       L.xaxis.visible = false;
       L.yaxis.automargin = true;
-      L.yaxis.tickfont = { size: 11 };
+      L.yaxis.tickfont = { size: 11.5 };
+      L.yaxis.ticklabelstandoff = 8;
       const lastLabel = c.last_period ? `, ${periodLabel(periodKey(ui.range.end, ui.grain))}` : '';
       tEl.textContent = `Доли по разрезу «${dimTitle[pdim].toLowerCase()}», ${titleOf(pm).split(',')[0].toLowerCase()}${lastLabel}`;
       draw(plotEl, traces, L);
@@ -536,8 +509,8 @@ function renderDashboard(el, payload, api) {
         const ex = ks.map(k => map.get(k).plan ? map.get(k).fact / map.get(k).plan * 100 : NaN);
         const [div, lab] = rubScale(plan.concat(fact));
         traces = [
-          { type: 'bar', orientation: 'h', y: short.slice().reverse(), x: plan.slice().reverse().map(v => v / div), name: 'План', width: 0.78, marker: { color: 'rgba(0,0,0,0)', line: { color: COLORS.plan, width: 1.4 } }, customdata: plan.slice().reverse().map(v => fmtNum(v, '₽')), hovertemplate: '%{y}<br>План %{customdata}<extra></extra>' },
-          { type: 'bar', orientation: 'h', y: short.slice().reverse(), x: fact.slice().reverse().map(v => v / div), name: 'Факт', width: 0.46, marker: { color: COLORS.fact },
+          { type: 'bar', orientation: 'h', y: short.slice().reverse(), x: plan.slice().reverse().map(v => v / div), name: 'План', width: 0.78, marker: { color: COLORS.planSoft }, customdata: plan.slice().reverse().map(v => fmtNum(v, '₽')), hovertemplate: '%{y}<br>План %{customdata}<extra></extra>' },
+          { type: 'bar', orientation: 'h', y: short.slice().reverse(), x: fact.slice().reverse().map(v => v / div), name: 'Факт', width: 0.42, marker: { color: COLORS.fact },
             textfont: { color: ex.slice().reverse().map(v => v >= 100 ? COLORS.good : COLORS.bad), size: 10.5 },
             text: ex.slice().reverse().map(v => isFinite(v) ? v.toFixed(0) + '%' : ''), textposition: 'outside', cliponaxis: false,
             customdata: fact.slice().reverse().map(v => fmtNum(v, '₽')), hovertemplate: '%{y}<br>Факт %{customdata}, выполнение %{text}<extra></extra>' },
@@ -554,13 +527,13 @@ function renderDashboard(el, payload, api) {
           marker: { color: dev.slice().reverse().map(v => v >= 0 ? COLORS.good : COLORS.bad) },
           text: pct.slice().reverse().map(p => isFinite(p) ? (p >= 0 ? '+' : '−') + Math.abs(p).toFixed(1).replace('.', ',') + '%' : ''),
           customdata: dev.slice().reverse().map(v => signed(v, '₽')),
-          textposition: 'auto', insidetextanchor: 'start', textfont: { size: 10.5 }, cliponaxis: false, hovertemplate: '%{y}<br>%{customdata}, %{text}<extra></extra>' }];
+          textposition: 'outside', textfont: { size: 11 }, cliponaxis: false, hovertemplate: '%{y}<br>%{customdata}, %{text}<extra></extra>' }];
         L.showlegend = false;
-        L.xaxis.title = { text: 'отклонение от плана, ' + lab, font: { size: 11 } };
+        L.xaxis.title = { text: lab, font: { size: 11 } };
         L.xaxis.zeroline = true;
-        L.xaxis.zerolinecolor = COLORS.ink;
+        L.xaxis.zerolinecolor = '#B9C0D0';
         const m = Math.max(...dev.map(v => Math.abs(v) / div), 0.1);
-        L.xaxis.range = [-m * 1.75, m * 1.3];
+        L.xaxis.range = [-m * 2.1, m * 1.5];
         tEl.textContent = `Отклонение от плана по разрезу «${dimTitle[dim].toLowerCase()}»`;
       } else {
         const vals = seriesValues(ks, map, showId, false);
@@ -581,7 +554,8 @@ function renderDashboard(el, payload, api) {
       L.margin.r = 80;
       L.xaxis.automargin = true;
       L.yaxis.automargin = true;
-      L.yaxis.tickfont = { size: 10.5 };
+      L.yaxis.tickfont = { size: 11.5 };
+      L.yaxis.ticklabelstandoff = 8;
       L.yaxis.tickmode = 'array';
       L.yaxis.tickvals = short.slice().reverse();
       draw(plotEl, traces, L);
@@ -614,10 +588,10 @@ function renderDashboard(el, payload, api) {
       for (const i of idx) if (data.cols.reason && data.cols.reason[i] !== 'Без скидки') withDisc += data.cols.deals[i];
       const m2 = group(idx.filter(i => data.cols.reason[i] !== 'Без скидки'), i => data.cols.reason[i]);
       const top = [...m2.entries()].sort((a, b) => b[1].discount - a[1].discount)[0];
-      cards.push({ label: 'Скидки', value: fmtNum(sum.discount, '₽'), chips: [[pctTxt(d) + ' к прошлому году', d > 0 ? 'bad' : 'good']], spark: sparkSvg(ser('discount'), { color: COLORS.fact }) });
-      cards.push({ label: 'Скидки к продажам', value: fmtNum(share, '%'), chips: [['продажи ' + fmtNum(sum.fact, '₽'), '']], spark: sparkSvg(keys.map(k => map.get(k).fact ? map.get(k).discount / map.get(k).fact * 100 : NaN), { color: COLORS.accent }) });
-      cards.push({ label: 'Сделок со скидкой', value: fmtNum(withDisc, 'шт'), chips: [['из ' + fmtNum(sum.deals, '') + ' сделок', '']], spark: '' });
-      cards.push({ label: 'Главная причина', value: top ? top[0] : '—', small: true, chips: top ? [[(top[1].discount / sum.discount * 100).toFixed(0) + '% всех скидок', '']] : [], spark: '' });
+      cards.push({ label: 'Скидки', value: fmtNum(sum.discount, '₽'), chips: [[pctTxt(d) + ' к прошлому году', d > 0 ? 'bad' : 'good']] });
+      cards.push({ label: 'Скидки к продажам', value: fmtNum(share, '%'), chips: [['продажи ' + fmtNum(sum.fact, '₽'), '']] });
+      cards.push({ label: 'Сделок со скидкой', value: fmtNum(withDisc, 'шт'), chips: [['из ' + fmtNum(sum.deals, '') + ' сделок', '']] });
+      cards.push({ label: 'Главная причина', value: top ? top[0] : '—', small: true, chips: top ? [[(top[1].discount / sum.discount * 100).toFixed(0) + '% всех скидок', '']] : [] });
     } else {
       const ex = sum.plan ? sum.fact / sum.plan * 100 : NaN;
       const dev = sum.fact - sum.plan;
@@ -626,27 +600,23 @@ function renderDashboard(el, payload, api) {
       const g = [...group(idx, i => data.cols[dim][i]).entries()].filter(([k, s0]) => s0.plan > 0).map(([k, s0]) => [k, s0.fact / s0.plan * 100]);
       g.sort((a, b) => a[1] - b[1]);
       const under = g.filter(x0 => x0[1] < 100).length;
-      cards.push({ label: 'Факт', value: fmtNum(sum.fact, '₽'), chips: [[pctTxt(dev / sum.plan * 100) + ' к плану', dev >= 0 ? 'good' : 'bad'], [pctTxt(d) + ' к прошлому году', d >= 0 ? 'good' : 'bad']],
-        spark: sparkSvg(ser('fact'), { second: ser('plan') }) });
-      cards.push({ label: 'Выполнение плана', value: fmtNum(ex, '%'), tone: ex >= 100 ? 'good' : 'bad', chips: [['план ' + fmtNum(sum.plan, '₽'), '']],
-        spark: sparkSvg(keys.map(k => map.get(k).plan ? map.get(k).fact / map.get(k).plan * 100 : NaN), { ref: 100, color: COLORS.accent }) });
-      cards.push({ label: 'Отклонение от плана', value: signed(dev, '₽'), tone: dev >= 0 ? 'good' : 'bad', chips: [[pctTxt(dev / sum.plan * 100) + ' от плана', dev >= 0 ? 'good' : 'bad']],
-        spark: sparkSvg(keys.map(k => map.get(k).fact - map.get(k).plan), { bars: true }) });
+      cards.push({ label: 'Факт', value: fmtNum(sum.fact, '₽'), chips: [[pctTxt(d) + ' к прошлому году', d >= 0 ? 'good' : 'bad']] });
+      cards.push({ label: 'Выполнение плана', value: fmtNum(ex, '%'), tone: ex >= 100 ? 'good' : 'bad', chips: [['план ' + fmtNum(sum.plan, '₽'), '']] });
+      cards.push({ label: 'Отклонение от плана', value: signed(dev, '₽'), tone: dev >= 0 ? 'good' : 'bad', chips: [[pctTxt(dev / sum.plan * 100) + ' от плана', dev >= 0 ? 'good' : 'bad']] });
       cards.push({ label: `Ниже плана, разрез «${dimTitle[dim].toLowerCase()}»`, value: `${under} из ${g.length}`, tone: under ? 'bad' : 'good', small: false,
-        chips: g.length ? [['слабее всех ' + (g[0][0].split(', ').slice(0, 2).join(', ')) + ', ' + g[0][1].toFixed(0) + '%', 'bad']] : [], spark: '' });
+        chips: g.length ? [['слабее всех ' + (g[0][0].split(', ').slice(0, 2).join(', ')) + ', ' + g[0][1].toFixed(0) + '%', 'bad']] : [] });
     }
     kpiBox.innerHTML = '';
     for (const c0 of cards) {
       const k = document.createElement('div');
       k.className = 'kpi ' + (c0.tone || '');
-      k.innerHTML = '<div class="k-label"></div><div class="k-row"><div class="k-val"></div><div class="k-spark"></div></div><div class="k-chips"></div>';
+      k.innerHTML = '<div class="k-label"></div><div class="k-val"></div><div class="k-deltas"></div>';
       k.querySelector('.k-label').textContent = c0.label;
       const v = k.querySelector('.k-val');
       v.textContent = c0.value;
       if (c0.small) v.classList.add('small');
-      k.querySelector('.k-spark').innerHTML = c0.spark || '';
-      const box = k.querySelector('.k-chips');
-      for (const [t, cls] of c0.chips) { const sp = document.createElement('span'); sp.className = 'chip ' + cls; sp.textContent = t; box.appendChild(sp); }
+      const box = k.querySelector('.k-deltas');
+      for (const [t, cls] of c0.chips) { const sp = document.createElement('div'); sp.className = 'delta ' + cls; sp.textContent = t; box.appendChild(sp); }
       kpiBox.appendChild(k);
     }
     return sum;
@@ -661,7 +631,7 @@ function renderDashboard(el, payload, api) {
     if (st.kpi === 'discounts') {
       const m2 = group(idx.filter(i => data.cols.reason[i] !== 'Без скидки'), i => data.cols.reason[i]);
       const top = [...m2.entries()].sort((a, b) => b[1].discount - a[1].discount)[0];
-      insight.innerHTML = `<b>Резюме.</b> Скидки ${fmtNum(sum.discount, '₽')}, это ${fmtNum(sum.discount / sum.fact * 100, '%')} продаж.` +
+      insight.innerHTML = `<b>Главное</b> Скидки ${fmtNum(sum.discount, '₽')}, это ${fmtNum(sum.discount / sum.fact * 100, '%')} продаж.` +
         (top ? ` Главная причина «${top[0]}», ${fmtNum(top[1].discount / sum.discount * 100, '%')} всех скидок.` : '');
       return;
     }
@@ -669,7 +639,7 @@ function renderDashboard(el, payload, api) {
     rows.sort((a, b) => b[1] - a[1]);
     const ex = sum.fact / sum.plan * 100;
     const under = rows.filter(r => r[1] < 100);
-    let t = `<b>Резюме.</b> План выполнен на ${fmtNum(ex, '%')}, `;
+    let t = `<b>Главное</b> План выполнен на ${fmtNum(ex, '%')}, `;
     t += sum.fact >= sum.plan ? `перевыполнение ${fmtNum(sum.fact - sum.plan, '₽')}. ` : `отставание ${fmtNum(sum.plan - sum.fact, '₽')}. `;
     if (rows.length > 1) {
       t += `Лидер по разрезу «${dt}»: ${rows[0][0]} (${fmtNum(rows[0][1], '%')}), `;
@@ -679,11 +649,47 @@ function renderDashboard(el, payload, api) {
     insight.innerHTML = t;
   }
 
+  // ---------- таблица по главному разрезу ----------
+  function renderTable(idx) {
+    const dim = data.cols[ui.dim] && ui.dim !== 'period' ? ui.dim : (data.cols.region ? 'region' : st.filter_dims[0]);
+    const map = group(idx, i => data.cols[dim][i]);
+    const disc = st.kpi === 'discounts';
+    let rows = [...map.entries()];
+    rows.sort((a, b) => disc ? b[1].discount - a[1].discount : b[1].fact - a[1].fact);
+    const total = rows.length;
+    rows = rows.slice(0, 12);
+    const short = k => { const s2 = k.split(', ').slice(0, 2).join(', '); return s2.length > 44 ? s2.slice(0, 42) + '…' : s2; };
+    let head, body;
+    if (hasPlan && !disc) {
+      const maxEx = Math.max(110, ...rows.map(([k, s0]) => s0.plan ? s0.fact / s0.plan * 100 : 0));
+      head = '<tr><th></th><th>План</th><th>Факт</th><th>Отклонение</th><th class="bar-col">Выполнение плана</th></tr>';
+      body = rows.map(([k, s0]) => {
+        const ex = s0.plan ? s0.fact / s0.plan * 100 : NaN, dev = s0.fact - s0.plan;
+        const cls = dev >= 0 ? 'good' : 'bad';
+        return `<tr><td>${esc(short(k))}</td><td>${fmtNum(s0.plan, '₽')}</td><td>${fmtNum(s0.fact, '₽')}</td><td class="${cls}">${signed(dev, '₽')}</td>` +
+          `<td class="bar-col"><div class="tcell"><div class="tbar"><div class="tbar-fill ${cls}" style="width:${Math.min(100, ex / maxEx * 100)}%"></div><div class="tbar-ref" style="left:${100 / maxEx * 100}%"></div></div><span class="${cls}">${fmtNum(ex, '%')}</span></div></td></tr>`;
+      }).join('');
+    } else {
+      const maxD = Math.max(...rows.map(([k, s0]) => s0.fact ? s0.discount / s0.fact * 100 : 0), 1);
+      head = '<tr><th></th><th>Продажи</th><th>Скидки</th><th class="bar-col">Скидки к продажам</th></tr>';
+      body = rows.map(([k, s0]) => {
+        const sh = s0.fact ? s0.discount / s0.fact * 100 : NaN;
+        return `<tr><td>${esc(short(k))}</td><td>${fmtNum(s0.fact, '₽')}</td><td>${fmtNum(s0.discount, '₽')}</td>` +
+          `<td class="bar-col"><div class="tcell"><div class="tbar"><div class="tbar-fill" style="width:${sh / maxD * 100}%"></div></div><span>${fmtNum(sh, '%')}</span></div></td></tr>`;
+      }).join('');
+    }
+    const more = total > rows.length ? `, первые ${rows.length} из ${total}` : '';
+    tableBox.innerHTML = `<div class="chart-title"><span class="t"></span></div><div class="tscroll"><table class="dt"><thead>${head}</thead><tbody>${body}</tbody></table></div>`;
+    tableBox.querySelector('.t').textContent = `Разрез «${dimTitle[dim].toLowerCase()}»${more}`;
+  }
+  function esc(t) { return String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
   function update() {
     const idx = rowsIdx(ui.range);
     const sum = kpis(idx);
     charts.forEach((c, i) => renderChart(c, chartEls[i], idx));
     summarize(idx, sum);
+    if (idx.length && (data.cols.fact)) renderTable(idx); else tableBox.innerHTML = '';
     selects.forEach(s => s.label());
     if (api && api.onChange) api.onChange({ filters: ui.filters, dim: ui.dim, metric: ui.metric, grain: ui.grain, view: ui.view });
   }
